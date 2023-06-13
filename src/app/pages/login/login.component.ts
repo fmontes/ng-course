@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,16 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  username: string = '';
+  private loginService = inject(LoginService);
+
+  identity: string = '';
   password: string = '';
 
   onSubmit() {
-    // Here is where you would typically call a service to submit
-    // the username and password to your server for authentication.
-    console.log('Username: ', this.username);
-    console.log('Password: ', this.password);
+    this.loginService.login(this.identity, this.password).subscribe(
+      (res) => {
+        console.log({ res });
+      }
+    );
   }
 }

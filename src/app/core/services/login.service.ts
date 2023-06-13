@@ -1,9 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment.development';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
+  http = inject(HttpClient);
 
-  constructor() { }
+  /**
+   * Make the login request
+   *
+   * @param {string} identity
+   * @param {string} password
+   * @return {*}
+   * @memberof LoginService
+   */
+  login(identity: string, password: string) {
+    return this.http.post(
+      `${environment.apiUrl}/api/collections/users/auth-with-password`,
+      {
+        identity,
+        password,
+      }
+    );
+  }
 }

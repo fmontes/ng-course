@@ -61,12 +61,6 @@ export class EditComponent implements OnInit {
     // });
   }
 
-  logout() {
-    // signOut(this.auth).then(() => {
-    //   this.router.navigate(['/login']);
-    // });
-  }
-
   addItem() {
     this.form.push(
       new FormGroup({

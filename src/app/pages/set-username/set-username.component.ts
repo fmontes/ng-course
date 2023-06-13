@@ -25,7 +25,4 @@ export class SetUsernameComponent {
   async saveUserName() {
 
   }
-
-  logout() {
-  }
 }

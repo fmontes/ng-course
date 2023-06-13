@@ -1,0 +1,18 @@
+{{ model | json }}
+
+<form action="" (ngSubmit)="saveUserName()">
+  <label for="username">Username</label>
+  <input
+    type="text"
+    placeholder="Enter your username"
+    id="username"
+    name="username"
+    [(ngModel)]="model.name"
+    required="required"
+  />
+  <button type="submit">Save</button>
+</form>
+
+<p>{{ errorMessage }}</p>
+
+<button (click)="logout()">Logout</button>

@@ -1,0 +1,12 @@
+<button type="button" (click)="addItem()">Add Item</button>
+
+<form action="" (submit)="saveLinks($event)">
+  <div *ngFor="let item of form.controls; let i = index" [formGroup]="item">
+    <input formControlName="name" placeholder="Name">
+    <input formControlName="link" placeholder="Link">
+  </div>
+  <button>Save</button>
+</form>
+<p>{{form.value | json}}</p>
+
+<button (click)="logout()">Logout</button>

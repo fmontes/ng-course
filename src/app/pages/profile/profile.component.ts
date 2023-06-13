@@ -4,13 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-username',
+  selector: 'app-profile',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './username.component.html',
-  styleUrls: ['./username.component.css'],
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css'],
 })
-export class UsernameComponent {
+export class ProfileComponent {
   activatedRoute = inject(ActivatedRoute);
 
   data$ = this.activatedRoute.data.pipe(map(({ data }) => data));

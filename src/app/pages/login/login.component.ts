@@ -1,16 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  router = inject(Router);
+  username: string = '';
+  password: string = '';
 
-  login() {}
+  onSubmit() {
+    // Here is where you would typically call a service to submit
+    // the username and password to your server for authentication.
+    console.log('Username: ', this.username);
+    console.log('Password: ', this.password);
+  }
 }

@@ -1,13 +1,13 @@
 import { Routes } from "@angular/router";
-import { haveUsernameGuard } from "./guards/have-username.guard";
-import { isUserLoginGuard } from "./guards/is-user-login.guard";
+import { haveUsernameGuard } from "./core/guards/have-username.guard";
+import { isUserLoginGuard } from "./core/guards/is-user-login.guard";
 
 import { SetUsernameComponent } from "./pages/set-username/set-username.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { EditComponent } from "./pages/edit/edit.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { UsernameComponent } from "./pages/username/username.component";
-import { userResolver } from "./resolvers/user.resolver";
+import { userResolver } from "./core/resolvers/user.resolver";
 
 export const routes: Routes = [
   {

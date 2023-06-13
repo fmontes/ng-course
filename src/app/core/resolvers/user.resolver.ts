@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 
 import { ResolveFn } from '@angular/router';
-import { Data } from '../pages/edit/edit.component';
+import { Data } from '../../pages/edit/edit.component';
 
 export const userResolver: ResolveFn<Data> = (route, state) => {
   // const username = route.params['username'];

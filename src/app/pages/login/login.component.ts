@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -22,7 +21,7 @@ export class LoginComponent {
   onSubmit() {
     this.userService.login(this.identity, this.password).subscribe(
       (res) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
     );
   }

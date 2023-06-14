@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CollectionsService } from 'src/app/core/services/collections.service';
 
 @Component({
   selector: 'app-home',
@@ -10,5 +11,9 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  private collectionService = inject(CollectionsService);
+
+  items$ = this.collectionService.getList();
+
 
 }

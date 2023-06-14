@@ -1,8 +1,6 @@
 import { Routes } from "@angular/router";
-import { haveUsernameGuard } from "./core/guards/have-username.guard";
 import { isUserLoginGuard } from "./core/guards/is-user-login.guard";
 
-import { SetUsernameComponent } from "./pages/set-username/set-username.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { EditComponent } from "./pages/edit/edit.component";
 import { HomeComponent } from "./pages/home/home.component";
@@ -19,14 +17,10 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'set-username',
-    component: SetUsernameComponent,
-    canActivate: [isUserLoginGuard],
-  },
+
   {
     path: 'edit',
-    canActivate: [haveUsernameGuard],
+    canActivate: [isUserLoginGuard],
     component: EditComponent
   },
   {

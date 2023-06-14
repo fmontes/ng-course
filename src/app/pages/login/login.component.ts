@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from 'src/app/core/services/login.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class LoginComponent {
   private loginService = inject(LoginService);
+  private cookieService = inject(CookieService);
 
   identity: string = '';
   password: string = '';
@@ -19,7 +21,7 @@ export class LoginComponent {
   onSubmit() {
     this.loginService.login(this.identity, this.password).subscribe(
       (res) => {
-        console.log({ res });
+        this.cookieService.set('token', res.token);
       }
     );
   }

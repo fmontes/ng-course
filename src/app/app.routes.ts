@@ -12,7 +12,8 @@ import { userResolver } from "./core/resolvers/user.resolver";
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [isUserLoginGuard],
   },
   {
     path: 'login',

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { UserService } from './core/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,13 @@ import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  private userService = inject(UserService);
+  private router = inject(Router);
+
+  authState$ = this.userService.authState$;
+
   logout() {
-    console.log('logout')
+    this.userService.logout();
+    this.router.navigate(['/login']);
   }
 }

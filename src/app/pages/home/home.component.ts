@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CollectionsService } from 'src/app/core/services/collections.service';
@@ -14,6 +14,4 @@ export class HomeComponent {
   private collectionService = inject(CollectionsService);
 
   items$ = this.collectionService.getList();
-
-
 }

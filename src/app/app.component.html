@@ -2,11 +2,16 @@
   <h1>Hello World</h1>
 </header>
 
+<p>{{ (authState$ | async)?.name }}</p>
+
 <nav>
-  <a routerLink="/login">Login</a>
-
-  <button (click)="logout()">Logout</button>
-
+  <ng-container *ngIf="authState$ | async; else loggedOut">
+    <button (click)="logout()">Logout</button>
+  </ng-container>
 </nav>
+
+<ng-template #loggedOut>
+  <a routerLink="/login">Login</a>
+</ng-template>
 
 <router-outlet></router-outlet>

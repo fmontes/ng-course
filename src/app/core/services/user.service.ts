@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment.development';
 import { UsersResponse } from '../types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,24 @@ import { tap } from 'rxjs/operators';
 export class UserService {
   private http = inject(HttpClient);
   private cookieService = inject(CookieService);
+
+  authState$ = new Subject<UsersResponse | null>();
+
+  constructor() {
+    const userId = this.cookieService.get('userId');
+
+    if (userId) {
+      this.http
+        .get<UsersResponse>(
+          `${environment.apiUrl}/api/collections/users/records/${userId}`
+        )
+        .subscribe((user) => {
+          this.authState$.next(user);
+        });
+    } else {
+      this.authState$.next(null);
+    }
+  }
 
   /**
    * Make the login request
@@ -31,8 +50,10 @@ export class UserService {
         }
       )
       .pipe(
-        tap(({ token }) => {
+        tap(({ token, record }) => {
+          this.authState$.next(record);
           this.cookieService.set('token', token);
+          this.cookieService.set('userId', record.id);
         })
       );
   }
@@ -44,5 +65,7 @@ export class UserService {
    */
   logout() {
     this.cookieService.delete('token');
+    this.cookieService.delete('userId');
+    this.authState$.next(null);
   }
 }

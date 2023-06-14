@@ -1,2 +1,5 @@
 <h3>I am the home</h3>
-{{ items$ | async | json }}
+<div *ngFor="let item of (items$ | async)">
+  <h2>{{ item.title }}</h2>
+  <a [href]="item.url">{{ item.url }}</a>
+</div>

@@ -3,6 +3,8 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { LinksRecord, LinksResponse } from '../types/pocketbase-types';
 import { ListResult } from 'pocketbase';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +12,17 @@ import { ListResult } from 'pocketbase';
 export class CollectionsService {
   http = inject(HttpClient);
 
-  getList() {
-    return this.http.get<ListResult<LinksRecord>>(
-      `${environment.apiUrl}/api/collections/links/records`
-    );
+  /**
+   * Get the list of links
+   *
+   * @return {*}  {Observable<LinksRecord[]>}
+   * @memberof CollectionsService
+   */
+  getList(): Observable<LinksRecord[]> {
+    return this.http
+      .get<ListResult<LinksRecord>>(
+        `${environment.apiUrl}/api/collections/links/records`
+      )
+      .pipe(map((res) => res.items));
   }
 }

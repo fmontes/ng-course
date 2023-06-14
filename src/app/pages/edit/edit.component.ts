@@ -8,8 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { CollectionsService } from '../../core/services/collections.service';
-import { LinksRecord } from '../..//core/types/pocketbase-types';
+import { LinksRecord } from '../../core/types/pocketbase-types';
 
+type FormLinkGroup = FormGroup<{
+  title: FormControl<string | null>;
+  url: FormControl<string | null>;
+}>;
 @Component({
   selector: 'app-edit',
   standalone: true,
@@ -20,49 +24,28 @@ import { LinksRecord } from '../..//core/types/pocketbase-types';
 export class EditComponent implements OnInit {
   private collectionService = inject(CollectionsService);
 
-  form = new FormArray<
-    FormGroup<{
-      title: FormControl<string | null>;
-      url: FormControl<string | null>;
-    }>
-  >([]);
+  form = new FormArray<FormLinkGroup>([]);
 
   ngOnInit(): void {
     this.collectionService.getList().subscribe((items: LinksRecord[]) => {
       items.forEach(({ title, url }) => {
-        this.form.push(
-          new FormGroup({
-            title: new FormControl(title, [Validators.required]),
-            url: new FormControl(url, [Validators.required]),
-          })
-        );
+        this.form.push(this.getFormLinkGroup(title, url));
       });
     });
   }
 
   addItem() {
-    this.form.push(
-      new FormGroup({
-        title: new FormControl('', [Validators.required]),
-        url: new FormControl('', [Validators.required]),
-      })
-    );
-
+    this.form.push(this.getFormLinkGroup());
   }
 
   saveLinks(e: SubmitEvent) {
     e.preventDefault();
+  }
 
-    // if (this.form.valid) {
-    //   this.user$.pipe(take(1)).subscribe((user) => {
-    //     if (user?.uid) {
-    //       const usersCollection = doc(this.firestore, 'users', user.uid);
-
-    //       updateDoc(usersCollection, { links: this.form.value }).then(() => {
-    //         console.log('Document successfully written!');
-    //       });
-    //     }
-    //   });
-    // }
+  private getFormLinkGroup(title = '', url = ''): FormLinkGroup {
+    return new FormGroup({
+      title: new FormControl(title, [Validators.required]),
+      url: new FormControl(url, [Validators.required]),
+    });
   }
 }

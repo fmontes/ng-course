@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
+import { catchError, filter } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +20,26 @@ export class LoginComponent {
 
   identity: string = '';
   password: string = '';
+  error: string = '';
 
-  onSubmit() {
-    this.userService.login(this.identity, this.password).subscribe(
-      (res) => {
+  /**
+   * Submit the login form
+   *
+   * @memberof LoginComponent
+   */
+  onSubmit(): void {
+    this.userService
+      .login(this.identity, this.password)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.error = err.error.message;
+          return of(null);
+        }),
+        filter((user) => !!user)
+      )
+      .subscribe((res) => {
+        this.error = '';
         this.router.navigate(['/']);
-      }
-    );
+      });
   }
 }

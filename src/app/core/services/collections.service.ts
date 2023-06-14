@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { LinksRecord, LinksResponse } from '../types/pocketbase-types';
+import { LinksRecord } from '../types/pocketbase-types';
 import { ListResult } from 'pocketbase';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';

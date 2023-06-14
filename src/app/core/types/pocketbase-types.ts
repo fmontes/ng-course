@@ -32,9 +32,9 @@ export type AuthSystemFields<T = never> = {
 // Record types for each collection
 
 export type LinksRecord = {
-	title?: string
-	url?: string
-	owner?: RecordIdString
+	title: string
+	url: string
+	owner: RecordIdString
 }
 
 export type UsersRecord = {

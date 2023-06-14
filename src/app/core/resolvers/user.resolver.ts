@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
 
 import { ResolveFn } from '@angular/router';
-import { Data } from '../../pages/edit/edit.component';
 
-export const userResolver: ResolveFn<Data> = (route, state) => {
+export const userResolver: ResolveFn<unknown> = (route, state) => {
   // const username = route.params['username'];
   // const firestore = inject(Firestore);
 

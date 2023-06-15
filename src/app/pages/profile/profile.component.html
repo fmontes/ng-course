@@ -1,8 +1,6 @@
 <ng-container *ngIf="data$ | async as vm">
-  <h1>{{ vm.username }}</h1>
+  <h2>{{ vm.user.name }}</h2>
   <ul>
-    <li *ngFor="let link of vm.links">
-      {{ link.name }} - {{ link.link }}
-    </li>
+    <li *ngFor="let link of vm.links">{{ link.title }} - {{ link.url }}</li>
   </ul>
 </ng-container>

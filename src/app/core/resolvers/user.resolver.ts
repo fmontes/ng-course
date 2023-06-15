@@ -1,26 +1,31 @@
 import { inject } from '@angular/core';
-
 import { ResolveFn } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { LinksResponse, UsersResponse } from '../types/pocketbase-types';
+import { CollectionsService } from '../services/collections.service';
+import { Observable } from 'rxjs';
 
-export const userResolver: ResolveFn<unknown> = (route, state) => {
-  // const username = route.params['username'];
-  // const firestore = inject(Firestore);
+export type ProfileData = {
+  user: UsersResponse;
+  links: LinksResponse[];
+};
 
-  // const q = query<Data>(
-  //   collection(firestore, 'users') as Query<Data>,
-  //   where('username', '==', username)
-  // );
+export const userResolver: ResolveFn<Observable<ProfileData>> = (route) => {
+  const userService = inject(UserService);
+  const collectionService = inject(CollectionsService);
+  const username: string = route.params['username'];
 
-  // return getDocs(q).then((querySnapshot) => {
-  //   const [doc] = querySnapshot.docs;
-  //   return doc.data();
-  // });
-
-  return {
-    username: 'fmontes',
-    links: [{
-      name: 'Twitter',
-      url: 'https://twitter.com/fmontes',
-    }]
-  }
+  return userService.getByUsername(username).pipe(
+    switchMap((user: UsersResponse) => {
+      return collectionService.getListByOwner(user.id).pipe(
+        map((links: LinksResponse[]) => {
+          return {
+            user: user,
+            links: links,
+          };
+        })
+      );
+    })
+  );
 };

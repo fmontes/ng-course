@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { RecordAuthResponse } from 'pocketbase';
+import { ListResult, RecordAuthResponse } from 'pocketbase';
 import { environment } from 'src/environments/environment.development';
 import { UsersResponse } from '../types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
-import { tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -67,5 +67,20 @@ export class UserService {
     this.cookieService.delete('token');
     this.cookieService.delete('userId');
     this.authState$.next(null);
+  }
+
+  /**
+   * Get the user information by username
+   *
+   * @param {string} username
+   * @return {*}  {Observable<UsersResponse>}
+   * @memberof UserService
+   */
+  getByUsername(username: string): Observable<UsersResponse> {
+    return this.http
+      .get<ListResult<UsersResponse>>(
+        `${environment.apiUrl}/api/collections/users/records?filter=(username='${username}')`
+      )
+      .pipe(map((res) => res.items[0]));
   }
 }

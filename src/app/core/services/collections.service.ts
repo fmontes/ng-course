@@ -27,6 +27,21 @@ export class CollectionsService {
   }
 
   /**
+   * Get the list of links by owner
+   *
+   * @param {string} owner
+   * @return {*}  {Observable<LinksResponse[]>}
+   * @memberof CollectionsService
+   */
+  getListByOwner(owner: string): Observable<LinksResponse[]> {
+    return this.http
+      .get<ListResult<LinksResponse>>(
+        `${environment.apiUrl}/api/collections/links/records?filter=(owner='${owner}')`
+      )
+      .pipe(map((res) => res.items));
+  }
+
+  /**
    * Save the list of links
    *
    * @param {LinksRecord[]} items

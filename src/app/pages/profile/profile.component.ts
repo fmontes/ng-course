@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { ProfileData } from 'src/app/core/resolvers/user.resolver';
 import { Observable } from 'rxjs';
+import { ProfileData } from 'src/app/core/resolvers/profile.resolver';
 
 @Component({
   selector: 'app-profile',

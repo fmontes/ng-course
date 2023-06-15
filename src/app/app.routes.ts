@@ -5,7 +5,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { EditComponent } from "./pages/edit/edit.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
-import { userResolver } from "./core/resolvers/user.resolver";
+import { profileResolver } from "./core/resolvers/profile.resolver";
 
 export const routes: Routes = [
   {
@@ -27,7 +27,7 @@ export const routes: Routes = [
     path: ':username',
     component: ProfileComponent,
     resolve: {
-      data: userResolver
+      data: profileResolver
     }
   },
 ];

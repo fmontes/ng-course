@@ -6,6 +6,8 @@ import { EditComponent } from "./pages/edit/edit.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { profileResolver } from "./core/resolvers/profile.resolver";
+import { profileGuard } from "./core/guards/profile.guard";
+import { ProfileNotFoundComponent } from "./pages/profile-not-found/profile-not-found.component";
 
 export const routes: Routes = [
   {
@@ -24,10 +26,15 @@ export const routes: Routes = [
     component: EditComponent
   },
   {
+    path: 'profile-not-found',
+    component: ProfileNotFoundComponent,
+  },
+  {
     path: ':username',
     component: ProfileComponent,
+    canActivate: [profileGuard],
     resolve: {
       data: profileResolver
     }
-  },
+  }
 ];

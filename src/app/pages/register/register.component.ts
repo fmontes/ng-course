@@ -10,7 +10,14 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 
-export const matchpassword: ValidatorFn = (
+type RegisterGroup = {
+  email: FormControl<string | null>;
+  username: FormControl<string | null>;
+  password: FormControl<string | null>;
+  confirmPassword: FormControl<string | null>;
+};
+
+export const matchPassword: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
   const password = control.get('password');
@@ -39,7 +46,7 @@ export const matchpassword: ValidatorFn = (
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
+  registerForm: FormGroup<RegisterGroup>;
 
   constructor() {
     this.registerForm = new FormGroup(
@@ -50,7 +57,7 @@ export class RegisterComponent {
         confirmPassword: new FormControl('', Validators.required),
       },
       {
-        validators: matchpassword,
+        validators: matchPassword,
       }
     );
   }

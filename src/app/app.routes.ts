@@ -8,6 +8,7 @@ import { ProfileComponent } from "./pages/profile/profile.component";
 import { profileResolver } from "./core/resolvers/profile.resolver";
 import { profileGuard } from "./core/guards/profile.guard";
 import { ProfileNotFoundComponent } from "./pages/profile-not-found/profile-not-found.component";
+import { RegisterComponent } from "./pages/register/register.component";
 
 export const routes: Routes = [
   {
@@ -19,7 +20,10 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
   {
     path: 'edit',
     canActivate: [isUserLoginGuard],

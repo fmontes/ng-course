@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
-import { LinksRecord } from '../types/pocketbase-types';
+import { LinksRecord, LinksResponse } from '../types/pocketbase-types';
 import { ListResult } from 'pocketbase';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +18,33 @@ export class CollectionsService {
    * @return {*}  {Observable<LinksRecord[]>}
    * @memberof CollectionsService
    */
-  getList(): Observable<LinksRecord[]> {
+  getList(): Observable<LinksResponse[]> {
     return this.http
-      .get<ListResult<LinksRecord>>(
+      .get<ListResult<LinksResponse>>(
         `${environment.apiUrl}/api/collections/links/records`
       )
       .pipe(map((res) => res.items));
+  }
+
+  /**
+   * Save the list of links
+   *
+   * @param {LinksRecord[]} items
+   * @return {*}  {Observable<LinksResponse[]>}
+   * @memberof CollectionsService
+   */
+  saveItems(items: LinksRecord[]): Observable<LinksResponse[]> {
+    const requests = items.map((item) =>
+      this.http.post<LinksResponse>(
+        `${environment.apiUrl}/api/collections/links/records`,
+        {
+          title: item.title,
+          url: item.url,
+          owner: item.owner,
+        }
+      )
+    );
+
+    return forkJoin(requests);
   }
 }

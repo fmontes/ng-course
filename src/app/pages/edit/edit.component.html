@@ -2,8 +2,9 @@
 
 <form action="" (submit)="saveLinks($event)">
   <div *ngFor="let item of form.controls; let i = index" [formGroup]="item">
-    <input formControlName="title" placeholder="Title">
-    <input formControlName="url" placeholder="URL">
+    <input type="text" formControlName="title" placeholder="Title" />
+    <input type="url" formControlName="url" placeholder="URL" />
+    <input type="hidden" formControlName="id" />
   </div>
   <button>Save</button>
 </form>

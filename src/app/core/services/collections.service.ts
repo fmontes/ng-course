@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { LinksRecord, LinksResponse } from '../types/pocketbase-types';
 import { ListResult } from 'pocketbase';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable, forkJoin, of } from 'rxjs';
 
 @Injectable({

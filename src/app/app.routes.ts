@@ -1,5 +1,4 @@
 import { Routes } from "@angular/router";
-import { isUserLoginGuard } from "./core/guards/is-user-login.guard";
 
 import { LoginComponent } from "./pages/login/login.component";
 import { EditComponent } from "./pages/edit/edit.component";
@@ -14,7 +13,6 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [isUserLoginGuard],
   },
   {
     path: 'login',

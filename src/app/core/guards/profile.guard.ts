@@ -3,6 +3,8 @@ import { CanActivateFn, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
+import { UsersResponse } from '../types/pocketbase-types';
+import { CookieService } from 'ngx-cookie-service';
 
 export const profileGuard: CanActivateFn = (
   route,
@@ -11,12 +13,14 @@ export const profileGuard: CanActivateFn = (
   const router = inject(Router);
   const username: string = route.params['username'];
   const userService = inject(UserService);
+  const cookieService = inject(CookieService);
 
   return userService.getByUsername(username).pipe(
-    map((user) => {
-      if (!!user) {
+    map((user: UsersResponse) => {
+      if (user.id === cookieService.get('userId')) {
         return true;
       }
+
 
       router.navigate(['profile-not-found']);
       return false;

@@ -13,20 +13,6 @@ export class CollectionsService {
   http = inject(HttpClient);
 
   /**
-   * Get the list of links
-   *
-   * @return {*}  {Observable<LinksRecord[]>}
-   * @memberof CollectionsService
-   */
-  getList(): Observable<LinksResponse[]> {
-    return this.http
-      .get<ListResult<LinksResponse>>(
-        `${environment.apiUrl}/api/collections/links/records`
-      )
-      .pipe(map((res) => res.items));
-  }
-
-  /**
    * Get the list of links by owner
    *
    * @param {string} owner

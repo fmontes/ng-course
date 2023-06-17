@@ -31,7 +31,6 @@ export const routes: Routes = [
   {
     path: ':username',
     component: ProfileComponent,
-    canActivate: [profileGuard],
     resolve: {
       data: profileResolver
     },

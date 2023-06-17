@@ -64,6 +64,8 @@ export class UserService {
       .pipe(
         tap(({ token, record }) => {
           this.authState$.next(record);
+          this.cookieService.delete('token');
+          this.cookieService.delete('userId');
           this.cookieService.set('token', token);
           this.cookieService.set('userId', record.id);
         })

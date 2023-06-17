@@ -7,6 +7,18 @@ import { CookieService } from 'ngx-cookie-service';
 import { map, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 
+type UserCredentials = {
+  username: string;
+  password: string;
+};
+
+export type UserRegisterPayload = UserCredentials & {
+  name: string;
+  email: string;
+  passwordConfirm: string;
+  verified: boolean;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -40,12 +52,12 @@ export class UserService {
    * @return {*}
    * @memberof LoginService
    */
-  login(identity: string, password: string) {
+  login({ username, password }: UserCredentials) {
     return this.http
       .post<RecordAuthResponse<UsersResponse>>(
         `${environment.apiUrl}/api/collections/users/auth-with-password`,
         {
-          identity,
+          identity: username,
           password,
         }
       )
@@ -56,6 +68,26 @@ export class UserService {
           this.cookieService.set('userId', record.id);
         })
       );
+  }
+
+  /**
+   * Register a new user
+   *
+   * @param {UserRegisterPayload} { name, username, password, email, confirmPassword }
+   * @return {*}
+   * @memberof UserService
+   */
+  register({
+    name,
+    username,
+    password,
+    email,
+    passwordConfirm,
+  }: UserRegisterPayload) {
+    return this.http.post<UsersResponse>(
+      `${environment.apiUrl}/api/collections/users/records`,
+      { name, username, password, email, passwordConfirm }
+    );
   }
 
   /**

@@ -29,7 +29,7 @@ export class LoginComponent {
    */
   onSubmit(): void {
     this.userService
-      .login(this.identity, this.password)
+      .login({ username: this.identity, password: this.password })
       .pipe(
         catchError((err: HttpErrorResponse) => {
           this.error = err.error.message;

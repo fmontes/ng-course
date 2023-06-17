@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormGroup,
@@ -9,26 +9,32 @@ import {
   ValidationErrors,
   ReactiveFormsModule,
 } from '@angular/forms';
+import {
+  UserRegisterPayload,
+  UserService,
+} from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 type RegisterGroup = {
+  name: FormControl<string | null>;
   email: FormControl<string | null>;
   username: FormControl<string | null>;
   password: FormControl<string | null>;
-  confirmPassword: FormControl<string | null>;
+  passwordConfirm: FormControl<string | null>;
 };
 
 export const matchPassword: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
   const password = control.get('password');
-  const confirmPassword = control.get('confirmPassword');
+  const passwordConfirm = control.get('passwordConfirm');
 
   if (
     password &&
     password.value &&
-    confirmPassword &&
-    confirmPassword.value &&
-    password?.value != confirmPassword?.value
+    passwordConfirm &&
+    passwordConfirm.value &&
+    password?.value != passwordConfirm?.value
   ) {
     return {
       passwordmatcherror: true,
@@ -47,14 +53,17 @@ export const matchPassword: ValidatorFn = (
 })
 export class RegisterComponent {
   registerForm: FormGroup<RegisterGroup>;
+  userService = inject(UserService);
+  router = inject(Router);
 
   constructor() {
     this.registerForm = new FormGroup(
       {
+        name: new FormControl('', [Validators.required, Validators.email]),
         email: new FormControl('', [Validators.required, Validators.email]),
         username: new FormControl('', Validators.required),
         password: new FormControl('', Validators.required),
-        confirmPassword: new FormControl('', Validators.required),
+        passwordConfirm: new FormControl('', Validators.required),
       },
       {
         validators: matchPassword,
@@ -63,11 +72,14 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    if (this.registerForm.invalid) {
+    if (!this.registerForm.invalid) {
       return;
     }
 
-    // Typically, here you would send the form data to the server
-    console.log('Form Value: ', this.registerForm.value);
+    this.userService
+      .register(this.registerForm.value as UserRegisterPayload)
+      .subscribe((res) => {
+        this.router.navigate([`/${res.username}`]);
+      });
   }
 }

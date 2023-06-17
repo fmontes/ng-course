@@ -10,6 +10,9 @@ import {
 import { CollectionsService } from '../../core/services/collections.service';
 import { LinksRecord } from '../../core/types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, map } from 'rxjs';
+import { ProfileData } from 'src/app/core/resolvers/profile.resolver';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;
@@ -26,12 +29,17 @@ type FormLinkGroup = FormGroup<{
 export class EditComponent implements OnInit {
   private collectionService = inject(CollectionsService);
   private cookieService = inject(CookieService);
-
+  private activatedRoute = inject(ActivatedRoute);
   form = new FormArray<FormLinkGroup>([]);
 
   ngOnInit(): void {
-    this.collectionService.getList().subscribe((items) => {
-      items.forEach(({ title, url, id }) => {
+    console.log('EditComponent ngOnInit');
+    const data$ = this.activatedRoute.data.pipe(
+      map(({ data }) => data)
+    ) as unknown as Observable<ProfileData>;
+
+    data$.subscribe(({ links }) => {
+      links.forEach(({ title, url, id }) => {
         this.form.push(this.getFormLinkGroup(title, url, id));
       });
     });

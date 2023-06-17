@@ -25,11 +25,6 @@ export const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'edit',
-    canActivate: [isUserLoginGuard],
-    component: EditComponent
-  },
-  {
     path: 'profile-not-found',
     component: ProfileNotFoundComponent,
   },
@@ -39,6 +34,14 @@ export const routes: Routes = [
     canActivate: [profileGuard],
     resolve: {
       data: profileResolver
-    }
+    },
+  },
+  {
+    path: ':username/edit',
+    component: EditComponent,
+    canActivate: [profileGuard],
+    resolve: {
+      data: profileResolver
+    },
   }
 ];

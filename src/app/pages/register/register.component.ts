@@ -13,7 +13,7 @@ import {
   UserRegisterPayload,
   UserService,
 } from 'src/app/core/services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 type RegisterGroup = {
   name: FormControl<string | null>;
@@ -55,13 +55,16 @@ export class RegisterComponent {
   registerForm: FormGroup<RegisterGroup>;
   userService = inject(UserService);
   router = inject(Router);
+  activatedRouter = inject(ActivatedRoute);
 
   constructor() {
+    const username = this.activatedRouter.snapshot.queryParams['username'];
+
     this.registerForm = new FormGroup(
       {
         name: new FormControl('', [Validators.required, Validators.email]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        username: new FormControl('', Validators.required),
+        username: new FormControl(username || '', Validators.required),
         password: new FormControl('', Validators.required),
         passwordConfirm: new FormControl('', Validators.required),
       },

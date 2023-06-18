@@ -2,7 +2,7 @@
   <h1>The Links App</h1>
 </header>
 
-<p>{{ (authState$ | async)?.name }}</p>
+<p>{{ (authState$ | async)?.username }}</p>
 
 <nav>
   <ng-container *ngIf="authState$ | async; else loggedOut">

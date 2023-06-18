@@ -1,1 +1,12 @@
-<h3>I am the home</h3>
+<form (ngSubmit)="onSubmit()">
+  <label for="username">Username</label>
+  <input
+    type="text"
+    name="username"
+    id="username"
+    placeholder="https://echolink.com/"
+    [(ngModel)]="username"
+
+  />
+  <button type="submit">Claim my link</button>
+</form>

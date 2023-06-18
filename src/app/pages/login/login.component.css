@@ -1,0 +1,7 @@
+:host {
+  @apply block max-w-sm mx-auto my-12;
+}
+
+form {
+  @apply mb-12;
+}

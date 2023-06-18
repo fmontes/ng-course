@@ -77,16 +77,19 @@ module.exports = {
           fontFamily: theme("fontFamily.display"),
           fontSize: theme("fontSize.5xl"),
           fontWeight: theme("fontWeight.bold"),
+          marginBottom: theme("spacing.4"),
         },
         h2: {
           fontFamily: theme("fontFamily.display"),
           fontSize: theme("fontSize.4xl"),
           fontWeight: theme("fontWeight.bold"),
+          marginBottom: theme("spacing.4"),
         },
         h3: {
           fontFamily: theme("fontFamily.display"),
           fontSize: theme("fontSize.3xl"),
           fontWeight: theme("fontWeight.bold"),
+          marginBottom: theme("spacing.4"),
         },
         label: {
           color: theme("colors.gray.100"),

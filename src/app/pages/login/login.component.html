@@ -1,3 +1,5 @@
+<h1 class="text-center">Login</h1>
+
 <form (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="username">Username</label>
@@ -22,3 +24,7 @@
   <button type="submit">Login</button>
   {{ error }}
 </form>
+
+<h2>Need an account?</h2>
+<a routerLink="/register" class="btn">Register</a>
+

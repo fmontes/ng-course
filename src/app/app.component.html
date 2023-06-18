@@ -1,5 +1,5 @@
 <header>
-  <h1>The Links App</h1>
+  <h1 class="text-3xl font-bold underline">The Links App</h1>
 </header>
 
 <p>{{ (authState$ | async)?.username }}</p>
@@ -11,7 +11,7 @@
 </nav>
 
 <ng-template #loggedOut>
-  <a routerLink="/login">Login</a>
+  <a routerLink="/login" class="btn">Login</a>
 </ng-template>
 
 <router-outlet></router-outlet>

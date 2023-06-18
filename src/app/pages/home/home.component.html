@@ -1,12 +1,30 @@
-<form (ngSubmit)="onSubmit()">
-  <label for="username">Username</label>
-  <input
-    type="text"
-    name="username"
-    id="username"
-    placeholder="https://echolink.com/"
-    [(ngModel)]="username"
+<div class="container grid grid-cols-2 gap-4 mx-auto mt-12">
+  <div>
+    <div class="mb-8">
+      <h2 class="text-6xl">
+        The Core of Your
+        <span
+          class="text-transparent bg-clip-text bg-gradient-to-b from-red-500 to-[#D67526]"
+          >Online Galaxy</span
+        >
+      </h2>
+      <p>
+        One link to connect your digital cosmos. Guide traffic from multiple
+        platforms and boost your online profile.
+      </p>
+    </div>
 
-  />
-  <button type="submit">Claim my link</button>
-</form>
+    <form (ngSubmit)="onSubmit()" class="flex gap-4">
+      <input
+        class="flex-grow"
+        type="text"
+        name="username"
+        id="username"
+        placeholder="https://echolink.com/"
+        [(ngModel)]="username"
+      />
+      <button type="submit">Claim my link</button>
+    </form>
+  </div>
+  <div></div>
+</div>

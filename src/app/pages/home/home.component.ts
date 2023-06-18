@@ -2,11 +2,12 @@ import { Component, Inject, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DevicePreviewComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

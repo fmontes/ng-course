@@ -1,7 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { UserService } from './core/services/user.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/components/header/header.component';
 
 @Component({
@@ -12,13 +11,4 @@ import { HeaderComponent } from './core/components/header/header.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private userService = inject(UserService);
-  private router = inject(Router);
-
-  authState$ = this.userService.authState$;
-
-  logout() {
-    this.userService.logout();
-    this.router.navigate(['/login']);
-  }
 }

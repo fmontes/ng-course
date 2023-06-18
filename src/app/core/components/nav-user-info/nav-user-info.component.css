@@ -1,0 +1,9 @@
+:host {
+  @apply flex gap-3;
+}
+
+app-user-avatar {
+  width: 24px;
+  height: 24px;
+  @apply overflow-hidden rounded-full;
+}

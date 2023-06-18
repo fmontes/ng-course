@@ -1,15 +1,3 @@
 <app-header></app-header>
 
-<p>{{ (authState$ | async)?.username }}</p>
-
-<nav>
-  <ng-container *ngIf="authState$ | async; else loggedOut">
-    <button (click)="logout()">Logout</button>
-  </ng-container>
-</nav>
-
-<ng-template #loggedOut>
-  <a routerLink="/login" class="btn">Login</a>
-</ng-template>
-
 <router-outlet></router-outlet>

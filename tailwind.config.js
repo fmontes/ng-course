@@ -107,6 +107,11 @@ module.exports = {
             backgroundColor: theme("colors.red.400"),
           },
         },
+        "button.link": {
+          all: "inherit",
+          display: 'inline',
+          cursor: 'pointer',
+        },
         "input[type='text'], input[type='password'], input[type='email'], input[type='url']": {
           appearance: "none",
           color: theme("colors.white"),

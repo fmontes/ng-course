@@ -77,7 +77,7 @@ module.exports = {
           fontWeight: theme("fontWeight.bold"),
         },
         label: {
-          color: theme("colors.gray.500"),
+          color: theme("colors.gray.100"),
         },
         "button, [type='button'], [type='reset'], [type='submit'], .btn": {
           appearance: "none",
@@ -85,7 +85,7 @@ module.exports = {
           backgroundColor: theme("colors.red.500"),
           display: "inline-flex",
           alignItems: "center",
-          height: '2.5rem',
+          height: "2.5rem",
           paddingLeft: theme("spacing.4"),
           paddingRight: theme("spacing.4"),
           transirionProperty: "background-color",
@@ -95,15 +95,15 @@ module.exports = {
             backgroundColor: theme("colors.red.400"),
           },
         },
-        "input[type='text'], input[type='password'], input[type='email']": {
+        "input[type='text'], input[type='password'], input[type='email'], input[type='url']": {
           appearance: "none",
           color: theme("colors.white"),
           backgroundColor: theme("colors.black.950"),
           border: "1px solid",
-          borderColor: theme("colors.gray.500"),
+          borderColor: theme("colors.gray.300"),
           paddingLeft: theme("spacing.3"),
           paddingRight: theme("spacing.3"),
-          height: '2.5rem',
+          height: "2.5rem",
           "&:hover": {
             borderColor: theme("colors.gray.300"),
           },
@@ -111,7 +111,14 @@ module.exports = {
             backgroundColor: theme("colors.red.950"),
             borderColor: theme("colors.white"),
           },
-        }
+        },
+        ".form-group": {
+          display: "flex",
+          flexDirection: "column",
+          width: "100%",
+          marginTop: theme("spacing.5"),
+          marginBottom: theme("spacing.5"),
+        },
       });
     }),
   ],

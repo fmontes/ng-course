@@ -4,6 +4,10 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
+    fontFamily: {
+      'sans': ['Inconsolata', 'sans-serif'],
+      'display': ['Archivo', 'sans-serif'],
+    },
     extend: {
       colors: {
         red: {

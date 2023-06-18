@@ -12,17 +12,17 @@ module.exports = {
     extend: {
       colors: {
         red: {
-          50: "#fef2f2",
-          100: "#fee6e5",
-          200: "#fccfd0",
-          300: "#f9a8a9",
-          400: "#f4787c",
-          500: "#eb4852",
-          600: "#d62639",
-          700: "#b61a2f",
-          800: "#98192e",
-          900: "#82192d",
-          950: "#490813",
+          50: "#feeced",
+          100: "#fde7e9",
+          200: "#fdd3d6",
+          300: "#faa8ae",
+          400: "#f56b74",
+          500: "#D62639",
+          600: "#c2242e",
+          700: "#931a22",
+          800: "#6a1519",
+          900: "#4e1317",
+          950: "#2c0709",
         },
         black: {
           50: "#f6f7f6",
@@ -76,6 +76,26 @@ module.exports = {
           fontSize: theme("fontSize.3xl"),
           fontWeight: theme("fontWeight.bold"),
         },
+        label: {
+          color: theme("colors.gray.500"),
+        },
+        "input[type='text'], input[type='password'], input[type='email']": {
+          appearance: "none",
+          color: theme("colors.white"),
+          backgroundColor: theme("colors.black.950"),
+          border: "1px solid",
+          borderColor: theme("colors.gray.500"),
+          paddingLeft: theme("spacing.3"),
+          paddingRight: theme("spacing.3"),
+          height: '2.5rem',
+          "&:hover": {
+            borderColor: theme("colors.gray.300"),
+          },
+          "&:focus": {
+            backgroundColor: theme("colors.red.950"),
+            borderColor: theme("colors.white"),
+          },
+        }
       });
     }),
   ],

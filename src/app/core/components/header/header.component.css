@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    height: 4rem;
+    @apply flex items-center justify-between px-8 bg-white bg-opacity-10;
+}
+
+nav {
+    @apply flex gap-8;
+}

@@ -60,6 +60,18 @@ module.exports = {
           color: theme("colors.white"),
           backgroundColor: theme("colors.black.950"),
           fontSize: "1.125rem",
+
+          "&:after": {
+            content: "''",
+            position: "fixed",
+            top: '-50%',
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: `${theme("colors.black.950")} radial-gradient(circle, ${theme("colors.red.500")} 0%, ${theme("colors.black.950")} 50%) no-repeat`,
+            zIndex: -1,
+            opacity: 0.35,
+          }
         },
         h1: {
           fontFamily: theme("fontFamily.display"),

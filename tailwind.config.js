@@ -16,7 +16,7 @@ module.exports = {
           100: "#fde7e9",
           200: "#fdd3d6",
           300: "#faa8ae",
-          400: "#f56b74",
+          400: "#f35862",
           500: "#D62639",
           600: "#c2242e",
           700: "#931a22",
@@ -78,6 +78,22 @@ module.exports = {
         },
         label: {
           color: theme("colors.gray.500"),
+        },
+        "button, [type='button'], [type='reset'], [type='submit'], .btn": {
+          appearance: "none",
+          color: theme("colors.white"),
+          backgroundColor: theme("colors.red.500"),
+          display: "inline-flex",
+          alignItems: "center",
+          height: '2.5rem',
+          paddingLeft: theme("spacing.4"),
+          paddingRight: theme("spacing.4"),
+          transirionProperty: "background-color",
+          transitionDuration: "150ms",
+          transitionTimingFunction: "ease-in-out",
+          "&:hover": {
+            backgroundColor: theme("colors.red.400"),
+          },
         },
         "input[type='text'], input[type='password'], input[type='email']": {
           appearance: "none",

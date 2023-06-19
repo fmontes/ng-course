@@ -9,6 +9,14 @@ module.exports = {
       sans: ["Inconsolata", "sans-serif"],
       display: ["Archivo", "sans-serif"],
     },
+    container: {
+      screens: {
+        sm: '600px',
+        md: '728px',
+        lg: '984px',
+        xl: '1080px',
+      },
+    },
     extend: {
       colors: {
         red: {

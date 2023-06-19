@@ -1,64 +1,72 @@
-<header class="container mx-auto mb-12">
-  <h1>Edit your page</h1>
-</header>
-
 <div class="container flex gap-16 mx-auto">
-  <form
-    *ngIf="!!items.controls.length"
-    [formGroup]="form"
-    (submit)="saveLinks($event)"
-    class="flex-1"
-  >
-    <div class="grid grid-cols-2 gap-6 mb-12">
-      <div class="flex gap-6">
-        <img
-          src="/assets/demo-avatar.jpg"
-          alt=""
-          class="block rounded-full"
-          height="76"
-          width="76"
-        />
-        <div class="m-0 form-group">
-          <label for="name">Full Name</label>
-          <input id="name" formControlName="name" type="text" />
-        </div>
-      </div>
-      <div class="m-0 form-group">
-        <label for="description">Description</label>
-        <input id="description" formControlName="description" type="text" />
-      </div>
-    </div>
+  <div class="flex-1">
+    <h1 class="mb-12">Edit your page</h1>
 
-    <hr class="mb-8 border-red-900" />
-
-    <div formArrayName="items">
-      <button type="button" (click)="addItem()">Add New Link</button>
-
-      <div
-        *ngFor="let item of items.controls; let i = index"
-        [formGroupName]="i"
-        class="grid grid-cols-2 gap-6 my-6"
-      >
-        <div class="m-0 form-group">
-          <label for="title">Title</label>
-          <input
-            id="title"
-            type="text"
-            formControlName="title"
-            placeholder="Title"
+    <form
+      *ngIf="!!items.controls.length"
+      [formGroup]="form"
+      (submit)="saveLinks($event)"
+    >
+      <div class="grid grid-cols-2 gap-6 mb-12">
+        <div class="flex gap-6">
+          <img
+            src="/assets/demo-avatar.jpg"
+            alt=""
+            class="block rounded-full"
+            height="76"
+            width="76"
           />
+          <div class="m-0 form-group">
+            <label for="name">Full Name</label>
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              class="w-full"
+            />
+          </div>
         </div>
         <div class="m-0 form-group">
-          <label for="url">URL</label>
-          <input id="url" type="url" formControlName="url" placeholder="URL" />
+          <label for="description">Description</label>
+          <input id="description" formControlName="description" type="text" />
         </div>
-        <input type="hidden" formControlName="id" />
       </div>
-    </div>
-    <button>Save</button>
-  </form>
-  <app-device-preview
-    class="col-start-7 col-end-12"
-    style="width: 393px; height: 852px"
-  />
+
+      <hr class="mb-8 border-red-900" />
+
+      <div formArrayName="items">
+        <button type="button" (click)="addItem()">Add New Link</button>
+
+        <div
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+          class="grid grid-cols-2 gap-6 my-6"
+        >
+          <div class="m-0 form-group">
+            <label for="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              placeholder="Title"
+            />
+          </div>
+          <div class="m-0 form-group">
+            <label for="url">URL</label>
+            <input
+              id="url"
+              type="url"
+              formControlName="url"
+              placeholder="URL"
+            />
+          </div>
+          <input type="hidden" formControlName="id" />
+        </div>
+      </div>
+      <button>Save</button>
+    </form>
+  </div>
+  <div class="relative" style="flex-basis: 393px;">
+    <app-device-preview class="fixed" style="width: 393px; height: 852px" />
+  </div>
 </div>

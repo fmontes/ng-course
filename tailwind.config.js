@@ -131,6 +131,9 @@ module.exports = {
             backgroundColor: theme("colors.primary.950"),
             borderColor: theme("colors.white"),
           },
+          "&::placeholder": {
+            color: theme("colors.gray.800"),
+          }
         },
         ".form-group": {
           display: "flex",

@@ -5,7 +5,8 @@
         The Core of Your
         <span
           class="text-transparent bg-clip-text bg-gradient-to-b from-primary-500 to-[#D67526]"
-          >Online Galaxy</span>
+          >Online Galaxy</span
+        >
       </h2>
       <p>
         One link to connect your digital cosmos. Guide traffic from multiple
@@ -13,17 +14,22 @@
       </p>
     </div>
 
-    <form (ngSubmit)="onSubmit()" class="flex gap-4">
+    <form (ngSubmit)="onSubmit()" class="flex items-center gap-4">
+      <p class="text-xl text-gray-500">https://echolink.com/</p>
       <input
-        class="flex-grow"
+        class="flex-grow w-12"
         type="text"
         name="username"
         id="username"
-        placeholder="https://echolink.com/"
+        placeholder="your-username"
         [(ngModel)]="username"
       />
-      <button type="submit">Claim my link</button>
+      <button type="submit" class="flex-shrink-0">Claim my link</button>
     </form>
+    <p *ngIf="!!message" class="px-3 py-1 mt-4 text-red-200 bg-red-800 rounded">{{ message }}</p>
   </div>
-  <app-device-preview class="flex-shrink-0" style="flex-basis: 393px; height: 852px" />
+  <app-device-preview
+    class="flex-shrink-0"
+    style="flex-basis: 393px; height: 852px"
+  />
 </div>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +13,21 @@ import { DevicePreviewComponent } from '../../core/components/device-preview/dev
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  message = '';
   router = inject(Router);
+  userService = inject(UserService);
   username: string = '';
 
   onSubmit(): void {
-    this.router.navigate(['/register'], {
-      queryParams: { username: this.username },
+    this.message = '';
+    this.userService.getByUsername(this.username).subscribe((user) => {
+      if (!user) {
+        this.router.navigate(['/register'], {
+          queryParams: { username: this.username },
+        });
+      }
+
+      this.message = 'User already exists';
     });
   }
 }

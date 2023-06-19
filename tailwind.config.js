@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 const plugin = require("tailwindcss/plugin");
+const colors = require('tailwindcss/colors')
+
+
+// COLORS GENERATED WITH: https://tailwindshades.app/
 
 module.exports = {
   content: ["./src/**/*.{html,ts}"],
@@ -20,44 +24,31 @@ module.exports = {
     extend: {
       colors: {
         red: {
-          50: "#feeced",
-          100: "#fde7e9",
-          200: "#fdd3d6",
-          300: "#faa8ae",
-          400: "#f35862",
+          50: "#FDF4F5",
+          100: "#FBE9EB",
+          200: "#F5C9CE",
+          300: "#EFA8B0",
+          400: "#E26774",
           500: "#D62639",
-          600: "#c2242e",
-          700: "#931a22",
-          800: "#6a1519",
-          900: "#4e1317",
-          950: "#2c0709",
+          600: "#C12233",
+          700: "#801722",
+          800: "#60111A",
+          900: "#400B11",
         },
-        black: {
-          50: "#f6f7f6",
-          100: "#e2e6e1",
-          200: "#c4cdc2",
-          300: "#9fac9c",
-          400: "#7a8a77",
-          500: "#5f6f5d",
-          600: "#4b5849",
-          700: "#3e483d",
-          800: "#343c33",
-          900: "#2e342d",
-          950: "#050605",
-        },
+        primary: colors.red,
+        black: '#050605',
         gray: {
-          50: "#f8f8f8",
-          100: "#f0f1ef",
-          200: "#e4e5e3",
-          300: "#c9cbc7",
-          400: "#b4b7b2",
-          500: "#9a9d96",
-          600: "#81857d",
-          700: "#6b6e67",
-          800: "#5a5c58",
-          900: "#4e504c",
-          950: "#282926",
-        },
+          50: "#FCFCFC",
+          100: "#FAFAF9",
+          200: "#F2F2F1",
+          300: "#E9EAE9",
+          400: "#D9DBD8",
+          500: "#C9CBC7",
+          600: "#B5B7B3",
+          700: "#797A77",
+          800: "#5A5B5A",
+          900: "#3C3D3C",
+        }
       },
     },
   },
@@ -66,7 +57,7 @@ module.exports = {
       addBase({
         html: {
           color: theme("colors.white"),
-          backgroundColor: theme("colors.black.950"),
+          backgroundColor: theme("colors.black"),
           fontSize: "1.125rem",
 
           "&:after": {
@@ -76,7 +67,7 @@ module.exports = {
             left: 0,
             width: "100%",
             height: "100%",
-            background: `${theme("colors.black.950")} radial-gradient(circle, ${theme("colors.red.500")} 0%, ${theme("colors.black.950")} 50%) no-repeat`,
+            background: `${theme("colors.black")} radial-gradient(circle, ${theme("colors.primary.500")} 0%, ${theme("colors.black")} 50%) no-repeat`,
             zIndex: -1,
             opacity: 0.35,
           }
@@ -106,7 +97,7 @@ module.exports = {
         "button, [type='button'], [type='reset'], [type='submit'], .btn": {
           appearance: "none",
           color: theme("colors.white"),
-          backgroundColor: theme("colors.red.500"),
+          backgroundColor: theme("colors.primary.500"),
           display: "inline-flex",
           alignItems: "center",
           height: "2.5rem",
@@ -116,7 +107,7 @@ module.exports = {
           transitionDuration: "150ms",
           transitionTimingFunction: "ease-in-out",
           "&:hover": {
-            backgroundColor: theme("colors.red.400"),
+            backgroundColor: theme("colors.primary.400"),
           },
         },
         "button.link": {
@@ -127,7 +118,7 @@ module.exports = {
         "input[type='text'], input[type='password'], input[type='email'], input[type='url']": {
           appearance: "none",
           color: theme("colors.white"),
-          backgroundColor: theme("colors.black.950"),
+          backgroundColor: theme("colors.black"),
           border: "1px solid",
           borderColor: theme("colors.gray.300"),
           paddingLeft: theme("spacing.3"),
@@ -137,7 +128,7 @@ module.exports = {
             borderColor: theme("colors.gray.300"),
           },
           "&:focus": {
-            backgroundColor: theme("colors.red.950"),
+            backgroundColor: theme("colors.primary.950"),
             borderColor: theme("colors.white"),
           },
         },

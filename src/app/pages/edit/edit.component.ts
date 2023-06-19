@@ -30,7 +30,14 @@ export class EditComponent implements OnInit {
   private collectionService = inject(CollectionsService);
   private cookieService = inject(CookieService);
   private activatedRoute = inject(ActivatedRoute);
-  form = new FormArray<FormLinkGroup>([]);
+
+  form = new FormGroup({
+    items: new FormArray<FormLinkGroup>([]),
+  });
+
+  get items() {
+    return this.form.get('items') as FormArray<FormLinkGroup>;
+  }
 
   ngOnInit(): void {
     console.log('EditComponent ngOnInit');
@@ -40,20 +47,20 @@ export class EditComponent implements OnInit {
 
     data$.subscribe(({ links }) => {
       links.forEach(({ title, url, id }) => {
-        this.form.push(this.getFormLinkGroup(title, url, id));
+        this.items.push(this.getFormLinkGroup(title, url, id));
       });
     });
   }
 
   addItem() {
-    this.form.push(this.getFormLinkGroup());
+    this.items.push(this.getFormLinkGroup());
   }
 
   saveLinks(e: SubmitEvent) {
     e.preventDefault();
 
-    const newLinks: LinksRecord[] = this.form.value
-      .filter((item) => item.id === '' && !!item.title && !!item.url)
+    const newLinks: LinksRecord[] | undefined = this.form.value.items
+      ?.filter((item) => item.id === '' && !!item.title && !!item.url)
       .map(({ title, url }) => {
         if (!title || !url) return;
 
@@ -66,9 +73,11 @@ export class EditComponent implements OnInit {
       })
       .filter((item): item is LinksRecord => item !== undefined);
 
-    this.collectionService.saveItems(newLinks).subscribe((res) => {
-      console.log(res);
-    });
+    if (newLinks) {
+      this.collectionService.saveItems(newLinks).subscribe((res) => {
+        console.log(res);
+      });
+    }
   }
 
   private getFormLinkGroup(title = '', url = '', id = ''): FormLinkGroup {

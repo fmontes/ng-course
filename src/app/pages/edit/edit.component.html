@@ -1,26 +1,31 @@
 <button type="button" (click)="addItem()">Add Item</button>
 
-<form action="" (submit)="saveLinks($event)">
-  <div
-    *ngFor="let item of form.controls; let i = index"
-    [formGroup]="item"
-    class="grid grid-cols-2 gap-6 my-6"
-  >
-    <div class="m-0 form-group">
-      <label for="title">Title</label>
-      <input
-        id="title"
-        type="text"
-        formControlName="title"
-        placeholder="Title"
-      />
-    </div>
-    <div class="m-0 form-group">
-      <label for="url">URL</label>
-      <input id="url" type="url" formControlName="url" placeholder="URL" />
+<form
+  *ngIf="!!items.controls.length"
+  [formGroup]="form"
+  (submit)="saveLinks($event)"
+>
+  <div formArrayName="items">
+    <div
+      *ngFor="let item of items.controls; let i = index"
+      [formGroupName]="i"
+      class="grid grid-cols-2 gap-6 my-6"
+    >
+      <div class="m-0 form-group">
+        <label for="title">Title</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          placeholder="Title"
+        />
+      </div>
+      <div class="m-0 form-group">
+        <label for="url">URL</label>
+        <input id="url" type="url" formControlName="url" placeholder="URL" />
+      </div>
+      <input type="hidden" formControlName="id" />
     </div>
   </div>
-  <input type="hidden" formControlName="id" />
   <button>Save</button>
 </form>
-<p>{{ form.value | json }}</p>

@@ -1,5 +1,6 @@
 :host {
   @apply block p-6 bg-red-500 border-2 border-red-400 rounded-xl;
-  box-shadow: 0.5rem 0 rgba(255, 255, 255, 0.15),
-    1rem 0 rgba(255, 255, 255, 0.15), 1.5rem 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0.75rem 0 rgba(255, 255, 255, 0.025),
+              1.75rem 0 rgba(255, 255, 255, 0.025),
+              2.75rem 0 rgba(255, 255, 255, 0.025);
 }

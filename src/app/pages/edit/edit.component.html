@@ -1,31 +1,63 @@
-<button type="button" (click)="addItem()">Add Item</button>
+<header class="container mx-auto mb-12">
+  <h1>Edit your page</h1>
+</header>
 
-<form
-  *ngIf="!!items.controls.length"
-  [formGroup]="form"
-  (submit)="saveLinks($event)"
->
-  <div formArrayName="items">
-    <div
-      *ngFor="let item of items.controls; let i = index"
-      [formGroupName]="i"
-      class="grid grid-cols-2 gap-6 my-6"
-    >
-      <div class="m-0 form-group">
-        <label for="title">Title</label>
-        <input
-          id="title"
-          type="text"
-          formControlName="title"
-          placeholder="Title"
+<div class="container flex gap-16 mx-auto">
+  <form
+    *ngIf="!!items.controls.length"
+    [formGroup]="form"
+    (submit)="saveLinks($event)"
+    class="flex-1"
+  >
+    <div class="grid grid-cols-2 gap-6 mb-12">
+      <div class="flex gap-6">
+        <img
+          src="/assets/demo-avatar.jpg"
+          alt=""
+          class="block rounded-full"
+          height="76"
+          width="76"
         />
+        <div class="m-0 form-group">
+          <label for="name">Full Name</label>
+          <input id="name" type="text" />
+        </div>
       </div>
       <div class="m-0 form-group">
-        <label for="url">URL</label>
-        <input id="url" type="url" formControlName="url" placeholder="URL" />
+        <label for="url">Description</label>
+        <input id="url" type="url" />
       </div>
-      <input type="hidden" formControlName="id" />
     </div>
-  </div>
-  <button>Save</button>
-</form>
+
+
+    <div formArrayName="items">
+      <button type="button" (click)="addItem()">Add New Link</button>
+
+      <div
+        *ngFor="let item of items.controls; let i = index"
+        [formGroupName]="i"
+        class="grid grid-cols-2 gap-6 my-6"
+      >
+        <div class="m-0 form-group">
+          <label for="title">Title</label>
+          <input
+            id="title"
+            type="text"
+            formControlName="title"
+            placeholder="Title"
+          />
+        </div>
+        <div class="m-0 form-group">
+          <label for="url">URL</label>
+          <input id="url" type="url" formControlName="url" placeholder="URL" />
+        </div>
+        <input type="hidden" formControlName="id" />
+      </div>
+    </div>
+    <button>Save</button>
+  </form>
+  <app-device-preview
+    class="col-start-7 col-end-12"
+    style="width: 393px; height: 852px"
+  />
+</div>

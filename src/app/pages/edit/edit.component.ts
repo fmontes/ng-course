@@ -11,8 +11,10 @@ import { CollectionsService } from '../../core/services/collections.service';
 import { LinksRecord } from '../../core/types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { ProfileData } from 'src/app/core/resolvers/profile.resolver';
+import { DevicePreviewComponent } from 'src/app/core/components/device-preview/device-preview.component';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;
@@ -22,7 +24,7 @@ type FormLinkGroup = FormGroup<{
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, DevicePreviewComponent],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
 })
@@ -44,7 +46,7 @@ export class EditComponent implements OnInit {
       map(({ data }) => data)
     ) as unknown as Observable<ProfileData>;
 
-    data$.subscribe(({ links }) => {
+    data$.pipe(take(1)).subscribe(({ links }) => {
       links.forEach(({ title, url, id }) => {
         this.items.push(this.getFormLinkGroup(title, url, id));
       });

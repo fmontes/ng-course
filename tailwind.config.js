@@ -93,6 +93,7 @@ module.exports = {
         },
         label: {
           color: theme("colors.gray.100"),
+          marginBottom: theme("spacing.1"),
         },
         "button, [type='button'], [type='reset'], [type='submit'], .btn": {
           appearance: "none",

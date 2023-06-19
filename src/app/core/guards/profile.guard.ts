@@ -16,7 +16,6 @@ export const profileGuard: CanActivateFn = (
   const cookieService = inject(CookieService);
 
   if (!cookieService.get('token') || !cookieService.get('userId')) {
-    console.log('not login')
     cookieService.delete('token');
     cookieService.delete('userId');
 
@@ -26,7 +25,6 @@ export const profileGuard: CanActivateFn = (
 
   return userService.getByUsername(username).pipe(
     map((user: UsersResponse) => {
-      console.log(user.id, cookieService.get('userId'), username, user.username);
 
       if (user.id === cookieService.get('userId')) {
         return true;

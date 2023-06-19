@@ -40,7 +40,6 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('EditComponent ngOnInit');
     const data$ = this.activatedRoute.data.pipe(
       map(({ data }) => data)
     ) as unknown as Observable<ProfileData>;

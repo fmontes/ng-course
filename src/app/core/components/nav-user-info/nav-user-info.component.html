@@ -1,5 +1,5 @@
 <ng-container *ngIf="authState$ | async as user; else notLoggedIn">
-  <a routerLink="/profile" class="flex items-center gap-1 ">
+  <a [routerLink]="'/' + user.username + '/edit'" class="flex items-center gap-1 ">
     <app-user-avatar [user]="user" />
     <span class="whitespace-nowrap">{{ user.name }}</span>
   </a>

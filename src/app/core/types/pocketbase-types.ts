@@ -40,6 +40,7 @@ export type LinksRecord = {
 export type UsersRecord = {
 	name?: string
 	avatar?: string
+	description?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API

@@ -34,6 +34,8 @@ export class EditComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
 
   form = new FormGroup({
+    name: new FormControl(''),
+    description: new FormControl(''),
     items: new FormArray<FormLinkGroup>([]),
   });
 
@@ -46,7 +48,13 @@ export class EditComponent implements OnInit {
       map(({ data }) => data)
     ) as unknown as Observable<ProfileData>;
 
-    data$.pipe(take(1)).subscribe(({ links }) => {
+    data$.pipe(take(1)).subscribe(({ links, user }) => {
+      console.log(user);
+      this.form.patchValue({
+        name: user.name,
+        description: user.description,
+      });
+
       links.forEach(({ title, url, id }) => {
         this.items.push(this.getFormLinkGroup(title, url, id));
       });

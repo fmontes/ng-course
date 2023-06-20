@@ -5,6 +5,7 @@ import { LinksRecord, LinksResponse } from '../types/pocketbase-types';
 import { ListResult } from 'pocketbase';
 import { map } from 'rxjs/operators';
 import { Observable, forkJoin, of } from 'rxjs';
+import { LinkPayload } from 'src/app/pages/edit/edit.component';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class CollectionsService {
    */
   getListByOwner(owner: string): Observable<LinksResponse[]> {
     return this.http
-      .get<ListResult<LinksResponse>>(
+      .get<ListResult<LinksResponse<LinksRecord>>>(
         `${environment.apiUrl}/api/collections/links/records?filter=(owner='${owner}')`
       )
       .pipe(map((res) => res.items));
@@ -34,16 +35,9 @@ export class CollectionsService {
    * @return {*}  {Observable<LinksResponse[]>}
    * @memberof CollectionsService
    */
-  saveItems(items: LinksRecord[]): Observable<LinksResponse[]> {
+  saveItems(items: LinkPayload[]): Observable<LinksResponse[]> {
     const requests = items.map((item) =>
-      this.http.post<LinksResponse>(
-        `${environment.apiUrl}/api/collections/links/records`,
-        {
-          title: item.title,
-          url: item.url,
-          owner: item.owner,
-        }
-      )
+      item.id ? this.updateItem(item) : this.createItem(item)
     );
 
     return forkJoin(requests);
@@ -59,6 +53,32 @@ export class CollectionsService {
   deleteItem(id: string): Observable<LinksResponse> {
     return this.http.delete<LinksResponse>(
       `${environment.apiUrl}/api/collections/links/records/${id}`
+    );
+  }
+
+  private createItem(
+    item: LinksRecord & { id: string }
+  ): Observable<LinksResponse> {
+    return this.http.post<LinksResponse>(
+      `${environment.apiUrl}/api/collections/links/records`,
+      {
+        title: item.title,
+        url: item.url,
+        owner: item.owner,
+      }
+    );
+  }
+
+  private updateItem(
+    item: LinksRecord & { id: string }
+  ): Observable<LinksResponse> {
+    return this.http.patch<LinksResponse>(
+      `${environment.apiUrl}/api/collections/links/records/${item.id}`,
+      {
+        title: item.title,
+        url: item.url,
+        owner: item.owner,
+      }
     );
   }
 }

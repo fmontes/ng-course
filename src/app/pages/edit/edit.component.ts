@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CollectionsService } from '../../core/services/collections.service';
-import { LinksRecord } from '../../core/types/pocketbase-types';
+import { LinksRecord, LinksResponse } from '../../core/types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,6 +21,12 @@ type FormLinkGroup = FormGroup<{
   url: FormControl<string | null>;
   id: FormControl<string | null>;
 }>;
+
+export type LinkPayload = Pick<
+  LinksResponse<LinksRecord>,
+  'title' | 'url' | 'id' | 'owner'
+>;
+
 @Component({
   selector: 'app-edit',
   standalone: true,
@@ -60,46 +66,77 @@ export class EditComponent implements OnInit {
     });
   }
 
+  /**
+   * Add a new link to the form
+   *
+   * @memberof EditComponent
+   */
   addItem() {
     this.items.push(this.getFormLinkGroup());
   }
 
+  /**
+   * Delete a link from the form
+   *
+   * @param {number} index
+   * @return {*}
+   * @memberof EditComponent
+   */
   deleteRow(index: number) {
     const item = this.items.at(index);
+
+    if (!item.value.id) {
+      this.items.removeAt(index);
+      return;
+    }
+
     this.collectionService.deleteItem(item.value.id as string).subscribe(() => {
       this.items.removeAt(index);
     });
   }
 
+  /**
+   * Save the links to the database
+   *
+   * @param {SubmitEvent} e
+   * @memberof EditComponent
+   */
   saveLinks(e: SubmitEvent) {
     e.preventDefault();
 
-    const newLinks: LinksRecord[] | undefined = this.form.value.links
-      ?.filter((item) => item.id === '' && !!item.title && !!item.url)
-      .map(({ title, url }) => {
-        if (!title || !url) return;
+    if (this.form.get('links')?.valid) {
+      const links = this.getLinksPayload(
+        this.form.value.links as LinkPayload[]
+      );
 
-        const link: LinksRecord = {
-          title,
-          url,
-          owner: this.cookieService.get('userId'),
-        };
-        return link;
-      })
-      .filter((item): item is LinksRecord => item !== undefined);
+      this.collectionService
+        .saveItems(links)
+        .subscribe((links: LinksResponse[]) => {
+          this.items.clear();
 
-    if (newLinks) {
-      this.collectionService.saveItems(newLinks).subscribe((res) => {
-        console.log(res);
-      });
+          links.forEach(({ title, url, id }) => {
+            this.items.push(this.getFormLinkGroup(title, url, id));
+          });
+        });
     }
+  }
+
+  private getLinksPayload(links: LinkPayload[]) {
+    return links.map((items) => {
+      return {
+        title: items.title,
+        url: items.url,
+        id: items.id,
+        owner: this.cookieService.get('userId'),
+      };
+    }) as LinkPayload[];
   }
 
   private getFormLinkGroup(title = '', url = '', id = ''): FormLinkGroup {
     return new FormGroup({
       title: new FormControl(title, [Validators.required]),
       url: new FormControl(url, [Validators.required]),
-      id: new FormControl(id, [Validators.required]),
+      id: new FormControl(id),
     });
   }
 }

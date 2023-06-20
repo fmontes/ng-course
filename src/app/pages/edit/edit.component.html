@@ -42,6 +42,7 @@
             [formGroupName]="i"
           >
             <button
+              type="button"
               class="px-3 bg-gray-700 hover:bg-gray-900"
               (click)="deleteRow(i)"
             >
@@ -76,12 +77,16 @@
     </form>
   </div>
   <div class="relative" style="flex-basis: 393px">
-    <app-device-preview [data]="form.value" class="fixed" style="width: 393px; height: 852px" />
+    <app-device-preview
+      [data]="form.value"
+      class="fixed"
+      style="width: 393px; height: 852px"
+    />
   </div>
 </div>
 
 <ng-template #noItems>
-  <div class="flex items-center justify-center bg-red-900 rounded-lg h-96">
+  <div class="flex items-center justify-center bg-red-900 h-96">
     <button type="button" (click)="addItem()">Add New Link</button>
   </div>
 </ng-template>

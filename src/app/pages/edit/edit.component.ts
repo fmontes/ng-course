@@ -65,7 +65,10 @@ export class EditComponent implements OnInit {
   }
 
   deleteRow(index: number) {
-    this.items.removeAt(index);
+    const item = this.items.at(index);
+    this.collectionService.deleteItem(item.value.id as string).subscribe(() => {
+      this.items.removeAt(index);
+    });
   }
 
   saveLinks(e: SubmitEvent) {

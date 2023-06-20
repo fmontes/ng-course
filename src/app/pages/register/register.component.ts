@@ -80,8 +80,6 @@ export class RegisterComponent {
   onSubmit() {
     this.formSubmitted = true;
 
-    console.log(this.registerForm.valid);
-
     if (!this.registerForm.valid) {
       return;
     }

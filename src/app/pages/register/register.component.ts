@@ -15,6 +15,9 @@ import {
 } from 'src/app/core/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ErrorMessageComponent } from 'src/app/core/components/error-message/error-message.component';
+import { catchError, of, switchMap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { PocketbaseError } from 'src/app/core/types/models';
 
 type RegisterGroup = {
   name: FormControl<string | null>;
@@ -67,14 +70,19 @@ export class RegisterComponent {
         name: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
         username: new FormControl(username || '', Validators.required),
-        password: new FormControl('', Validators.required),
-        passwordConfirm: new FormControl('', Validators.required),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+        ]),
+        passwordConfirm: new FormControl('', [
+          Validators.required,
+          Validators.minLength(8),
+        ]),
       },
       {
         validators: matchPassword,
       }
     );
-
   }
 
   onSubmit() {
@@ -86,8 +94,31 @@ export class RegisterComponent {
 
     this.userService
       .register(this.registerForm.value as UserRegisterPayload)
-      .subscribe((res) => {
-        this.router.navigate([`/${res.username}`]);
+      .pipe(
+        catchError(({ error }: HttpErrorResponse) => {
+          const e = error as PocketbaseError;
+          console.error(e);
+          // If an error occurs during registration, complete the Observable
+          return of(null);
+        }),
+        switchMap((res) => {
+          // If the registration was successful, res will be defined
+          if (res) {
+            return this.userService.login({
+              username: this.registerForm.value.username,
+              password: this.registerForm.value.password,
+            } as UserRegisterPayload);
+          }
+          // If an error occurred during registration, res will be null,
+          // so complete the Observable without attempting to log in
+          return of(null);
+        })
+      )
+      .subscribe((user) => {
+        // If an error occurred during registration or login, user will be null
+        if (user) {
+          this.router.navigate([`/${user.record.username}/edit`]);
+        }
       });
   }
 }

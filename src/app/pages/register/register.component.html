@@ -42,7 +42,7 @@
       [control]="registerForm.controls['password']"
       [formSubmitted]="formSubmitted"
     >
-      Password is required
+      Password is required (min 8 characters)
     </app-error-message>
   </div>
   <div class="form-group">
@@ -55,14 +55,14 @@
     />
     <app-error-message
       class="mt-2"
-      [control]="registerForm.controls['password']"
+      [control]="registerForm.controls['passwordConfirm']"
       [formSubmitted]="formSubmitted"
     >
-      Confirm Password is required
+      Confirm Password is required (min 8 characters)
     </app-error-message>
   </div>
-  <span *ngIf="registerForm.errors?.['passwordmatcherror']"
+  <p *ngIf="registerForm.errors?.['passwordmatcherror']"
     >Password does not match
-  </span>
+  </p>
   <button type="submit">Register</button>
 </form>

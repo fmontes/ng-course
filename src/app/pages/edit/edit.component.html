@@ -2,11 +2,7 @@
   <div class="flex-1">
     <h1 class="mb-12">Edit your page</h1>
 
-    <form
-      *ngIf="!!items.controls.length"
-      [formGroup]="form"
-      (submit)="saveLinks($event)"
-    >
+    <form [formGroup]="form" (submit)="saveLinks($event)">
       <div class="grid grid-cols-2 gap-6 mb-12">
         <div class="flex gap-6">
           <img
@@ -34,7 +30,7 @@
 
       <hr class="mb-8 border-primary-900" />
 
-      <div formArrayName="items">
+      <div formArrayName="items" *ngIf="items.controls.length; else noItems">
         <button type="button" (click)="addItem()">Add New Link</button>
 
         <div
@@ -62,11 +58,17 @@
           </div>
           <input type="hidden" formControlName="id" />
         </div>
+        <button>Save</button>
       </div>
-      <button>Save</button>
     </form>
   </div>
-  <div class="relative" style="flex-basis: 393px;">
+  <div class="relative" style="flex-basis: 393px">
     <app-device-preview class="fixed" style="width: 393px; height: 852px" />
   </div>
 </div>
+
+<ng-template #noItems>
+  <div class="flex items-center justify-center bg-red-900 rounded-lg h-96">
+    <button type="button" (click)="addItem()">Add New Link</button>
+  </div>
+</ng-template>

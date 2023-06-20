@@ -49,7 +49,6 @@ export class EditComponent implements OnInit {
     ) as unknown as Observable<ProfileData>;
 
     data$.pipe(take(1)).subscribe(({ links, user }) => {
-      console.log(user);
       this.form.patchValue({
         name: user.name,
         description: user.description,

@@ -14,6 +14,7 @@ import {
   UserService,
 } from 'src/app/core/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorMessageComponent } from 'src/app/core/components/error-message/error-message.component';
 
 type RegisterGroup = {
   name: FormControl<string | null>;
@@ -47,7 +48,7 @@ export const matchPassword: ValidatorFn = (
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ErrorMessageComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
@@ -56,13 +57,14 @@ export class RegisterComponent {
   userService = inject(UserService);
   router = inject(Router);
   activatedRouter = inject(ActivatedRoute);
+  formSubmitted = false;
 
   constructor() {
     const username = this.activatedRouter.snapshot.queryParams['username'];
 
     this.registerForm = new FormGroup(
       {
-        name: new FormControl('', [Validators.required, Validators.email]),
+        name: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
         username: new FormControl(username || '', Validators.required),
         password: new FormControl('', Validators.required),
@@ -72,10 +74,15 @@ export class RegisterComponent {
         validators: matchPassword,
       }
     );
+
   }
 
   onSubmit() {
-    if (!this.registerForm.invalid) {
+    this.formSubmitted = true;
+
+    console.log(this.registerForm.valid);
+
+    if (!this.registerForm.valid) {
       return;
     }
 

@@ -4,18 +4,46 @@
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" id="email" formControlName="email" required />
+    <app-error-message
+      class="mt-2"
+      [control]="registerForm.controls['email']"
+      [formSubmitted]="formSubmitted"
+    >
+      Email is required
+    </app-error-message>
   </div>
   <div class="form-group">
     <label for="name">Name</label>
     <input type="text" id="name" formControlName="name" required />
+    <app-error-message
+      class="mt-2"
+      [control]="registerForm.controls['name']"
+      [formSubmitted]="formSubmitted"
+    >
+      Name is required
+    </app-error-message>
   </div>
   <div class="form-group">
     <label for="username">Username</label>
     <input type="text" id="username" formControlName="username" required />
+    <app-error-message
+      class="mt-2"
+      [control]="registerForm.controls['username']"
+      [formSubmitted]="formSubmitted"
+    >
+      Username is required
+    </app-error-message>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password" id="password" formControlName="password" required />
+    <app-error-message
+      class="mt-2"
+      [control]="registerForm.controls['password']"
+      [formSubmitted]="formSubmitted"
+    >
+      Password is required
+    </app-error-message>
   </div>
   <div class="form-group">
     <label for="passwordConfirm">Confirm Password</label>
@@ -25,6 +53,13 @@
       formControlName="passwordConfirm"
       required
     />
+    <app-error-message
+      class="mt-2"
+      [control]="registerForm.controls['password']"
+      [formSubmitted]="formSubmitted"
+    >
+      Confirm Password is required
+    </app-error-message>
   </div>
   <span *ngIf="registerForm.errors?.['passwordmatcherror']"
     >Password does not match

@@ -1,4 +1,5 @@
 <h1 class="text-center">Login</h1>
+<p *ngIf="!!error" class="px-3 py-1 mt-4 text-red-200 bg-red-800 rounded">{{ error }}</p>
 
 <form (ngSubmit)="onSubmit()">
   <div class="form-group">
@@ -22,7 +23,7 @@
     />
   </div>
   <button type="submit">Login</button>
-  {{ error }}
+
 </form>
 
 <h2>Need an account?</h2>

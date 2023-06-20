@@ -28,6 +28,11 @@ export class LoginComponent {
    * @memberof LoginComponent
    */
   onSubmit(): void {
+    if (this.identity === '' || this.password === '') {
+      this.error = 'Please enter your username and password';
+      return;
+    }
+
     this.userService
       .login({ username: this.identity, password: this.password })
       .pipe(

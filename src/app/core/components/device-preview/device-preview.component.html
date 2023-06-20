@@ -1,11 +1,21 @@
-  <header class="mb-8 text-center">
-    <img src="/assets/demo-avatar.jpg" width="100" height="100" alt="" class="inline rounded-full" />
-    <h1 class="mb-0 text-2xl">Freddy Montes</h1>
-    <p>Frontend Developer</p>
-  </header>
+<header class="mb-8 text-center">
+  <img
+    src="/assets/demo-avatar.jpg"
+    width="100"
+    height="100"
+    alt=""
+    class="inline rounded-full"
+  />
+  <h1 class="mb-0 text-2xl">{{ data.name }}</h1>
+  <p>{{ data.description }}</p>
+</header>
 
-  <ul class="flex flex-col gap-4">
-    <li *ngFor="let link of links">
-      <a [href]="link.url" class="flex items-center justify-center block h-12 text-xl border-2 border-white">{{ link.title }}</a>
-    </li>
-  </ul>
+<ul class="flex flex-col gap-4">
+  <li *ngFor="let link of data?.links">
+    <a
+      [href]="link.url"
+      class="flex items-center justify-center block h-12 text-xl border-2 border-white"
+      >{{ link.title }}</a
+    >
+  </li>
+</ul>

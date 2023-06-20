@@ -30,7 +30,7 @@
 
       <hr class="mb-8 border-primary-900" />
 
-      <div formArrayName="items" *ngIf="items.controls.length; else noItems">
+      <div formArrayName="links" *ngIf="items.controls.length; else noItems">
         <p class="flex justify-end m-0">
           <button type="button" (click)="addItem()">Add New Link</button>
         </p>
@@ -76,7 +76,7 @@
     </form>
   </div>
   <div class="relative" style="flex-basis: 393px">
-    <app-device-preview class="fixed" style="width: 393px; height: 852px" />
+    <app-device-preview [data]="form.value" class="fixed" style="width: 393px; height: 852px" />
   </div>
 </div>
 

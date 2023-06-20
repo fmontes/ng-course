@@ -36,11 +36,11 @@ export class EditComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
-    items: new FormArray<FormLinkGroup>([]),
+    links: new FormArray<FormLinkGroup>([]),
   });
 
   get items() {
-    return this.form.get('items') as FormArray<FormLinkGroup>;
+    return this.form.get('links') as FormArray<FormLinkGroup>;
   }
 
   ngOnInit(): void {
@@ -71,7 +71,7 @@ export class EditComponent implements OnInit {
   saveLinks(e: SubmitEvent) {
     e.preventDefault();
 
-    const newLinks: LinksRecord[] | undefined = this.form.value.items
+    const newLinks: LinksRecord[] | undefined = this.form.value.links
       ?.filter((item) => item.id === '' && !!item.title && !!item.url)
       .map(({ title, url }) => {
         if (!title || !url) return;

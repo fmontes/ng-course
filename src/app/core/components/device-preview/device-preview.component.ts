@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProfileData } from '../../resolvers/profile.resolver';
 
 @Component({
   selector: 'app-device-preview',
@@ -9,26 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./device-preview.component.css'],
 })
 export class DevicePreviewComponent {
-  links = [
-    {
-      title: 'CV Download',
-      url: '#',
-    },
-    {
-      title: 'Youtube',
-      url: '#',
-    },
-    {
-      title: 'Twitter',
-      url: '#',
-    },
-    {
-      title: 'LinkedIn',
-      url: '#',
-    },
-    {
-      title: 'Instagram',
-      url: '#',
-    },
-  ];
+  @Input() data: any | null = null;
 }

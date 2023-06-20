@@ -31,33 +31,46 @@
       <hr class="mb-8 border-primary-900" />
 
       <div formArrayName="items" *ngIf="items.controls.length; else noItems">
-        <button type="button" (click)="addItem()">Add New Link</button>
+        <p class="flex justify-end m-0">
+          <button type="button" (click)="addItem()">Add New Link</button>
+        </p>
 
-        <div
-          *ngFor="let item of items.controls; let i = index"
-          [formGroupName]="i"
-          class="grid grid-cols-2 gap-6 my-6"
-        >
-          <div class="m-0 form-group">
-            <label for="title">Title</label>
-            <input
-              id="title"
-              type="text"
-              formControlName="title"
-              placeholder="Title"
-            />
+        <div class="flex flex-col gap-3 mb-8">
+          <div
+            class="flex items-end gap-4"
+            *ngFor="let item of items.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <button
+              class="px-3 bg-gray-700 hover:bg-gray-900"
+              (click)="deleteRow(i)"
+            >
+              <img src="/assets/ico-trash.svg" width="24" alt="" />
+            </button>
+            <div class="grid grid-cols-2 gap-4 grow">
+              <div class="m-0 form-group">
+                <label for="title">Title</label>
+                <input
+                  id="title"
+                  type="text"
+                  formControlName="title"
+                  placeholder="Title"
+                />
+              </div>
+              <div class="m-0 form-group">
+                <label for="url">URL</label>
+                <input
+                  id="url"
+                  type="url"
+                  formControlName="url"
+                  placeholder="URL"
+                />
+              </div>
+              <input type="hidden" formControlName="id" />
+            </div>
           </div>
-          <div class="m-0 form-group">
-            <label for="url">URL</label>
-            <input
-              id="url"
-              type="url"
-              formControlName="url"
-              placeholder="URL"
-            />
-          </div>
-          <input type="hidden" formControlName="id" />
         </div>
+
         <button>Save</button>
       </div>
     </form>

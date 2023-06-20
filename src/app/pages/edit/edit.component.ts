@@ -64,6 +64,10 @@ export class EditComponent implements OnInit {
     this.items.push(this.getFormLinkGroup());
   }
 
+  deleteRow(index: number) {
+    this.items.removeAt(index);
+  }
+
   saveLinks(e: SubmitEvent) {
     e.preventDefault();
 

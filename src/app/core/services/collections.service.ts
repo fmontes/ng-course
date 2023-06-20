@@ -48,4 +48,17 @@ export class CollectionsService {
 
     return forkJoin(requests);
   }
+
+  /**
+   * Delete a link by id
+   *
+   * @param {string} id
+   * @return {*}  {Observable<LinksResponse>}
+   * @memberof CollectionsService
+   */
+  deleteItem(id: string): Observable<LinksResponse> {
+    return this.http.delete<LinksResponse>(
+      `${environment.apiUrl}/api/collections/links/records/${id}`
+    );
+  }
 }

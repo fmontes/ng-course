@@ -26,9 +26,35 @@
       />
       <button type="submit" class="flex-shrink-0">Claim my link</button>
     </form>
-    <p *ngIf="!!message" class="px-3 py-1 mt-4 text-red-200 bg-red-800 rounded">{{ message }}</p>
+    <p *ngIf="!!message" class="px-3 py-1 mt-4 text-red-200 bg-red-800 rounded">
+      {{ message }}
+    </p>
   </div>
   <app-device-preview
+    [data]="{
+    name: 'Freddy Montes',
+    description: 'UX Engineer',
+    links: [{
+      title: 'Twitter',
+      url: '#',
+    },
+    {
+      title: 'Instagram',
+      url: '#',
+    },
+    {
+      title: 'LinkedIn',
+      url: '#',
+    },
+    {
+      title: 'YouTube',
+      url: '#',
+    },
+    {
+      title: 'TikTok',
+      url: '#',
+    }]
+  }"
     class="flex-shrink-0"
     style="flex-basis: 393px; height: 852px"
   />

@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
 import { LinksRecord, LinksResponse } from '../types/pocketbase-types';
 import { ListResult } from 'pocketbase';
 import { map } from 'rxjs/operators';
 import { Observable, forkJoin, of } from 'rxjs';
-import { LinkPayload } from 'src/app/pages/edit/edit.component';
+import { environment } from '../../../environments/environment.development';
+import { LinkPayload } from '../../pages/edit/edit.component';
 
 @Injectable({
   providedIn: 'root',

@@ -9,15 +9,13 @@ import {
   ValidationErrors,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {
-  UserRegisterPayload,
-  UserService,
-} from 'src/app/core/services/user.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
-import { ErrorMessageComponent } from 'src/app/core/components/error-message/error-message.component';
 import { catchError, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PocketbaseError } from 'src/app/core/types/models';
+import { PocketbaseError } from '../../core/types/models'
+import { ErrorMessageComponent } from '../../core/components/error-message/error-message.component';
+import { UserRegisterPayload, UserService } from '../../core/services/user.service';
 
 type RegisterGroup = {
   name: FormControl<string | null>;

@@ -2,10 +2,10 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
 import { catchError, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-login',

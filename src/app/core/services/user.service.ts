@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ListResult, RecordAuthResponse } from 'pocketbase';
-import { environment } from 'src/environments/environment.development';
 import { UsersResponse } from '../types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { map, tap } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 type UserCredentials = {
   username: string;

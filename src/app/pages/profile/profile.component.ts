@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ProfileData } from 'src/app/core/resolvers/profile.resolver';
+import { ProfileData } from '../../core/resolvers/profile.resolver';
 
 @Component({
   selector: 'app-profile',

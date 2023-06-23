@@ -13,8 +13,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { ProfileData } from 'src/app/core/resolvers/profile.resolver';
-import { DevicePreviewComponent } from 'src/app/core/components/device-preview/device-preview.component';
+import { ProfileData } from '../../core/resolvers/profile.resolver';
+import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;

@@ -78,11 +78,9 @@
     </form>
   </div>
   <div class="relative" style="flex-basis: 393px">
-    <app-device-preview
-      [data]="form.value"
-      class="fixed"
-      style="width: 393px; height: 852px"
-    />
+    <app-preview-page class="fixed" style="width: 393px; height: 852px">
+      <app-public-page [data]="form.value" />
+    </app-preview-page>
   </div>
 </div>
 

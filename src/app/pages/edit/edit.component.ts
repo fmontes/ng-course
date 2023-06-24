@@ -18,9 +18,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, forkJoin, merge } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { ProfileData } from '../../core/resolvers/profile.resolver';
-import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
+import { PublicPageComponent } from '../../core/components/public-page/public-page.component';
 import { AvatarUploadComponent } from './components/avatar-upload/avatar-upload.component';
 import { UserService } from '../../core/services/user.service';
+import { PreviewPageComponent } from '../../core/components/preview-page/preview-page.component';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;
@@ -39,8 +40,9 @@ export type LinkPayload = Pick<
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    DevicePreviewComponent,
+    PublicPageComponent,
     AvatarUploadComponent,
+    PreviewPageComponent
   ],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],

@@ -2,13 +2,14 @@ import { Component, Inject, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
+import { PublicPageComponent } from '../../core/components/public-page/public-page.component';
 import { UserService } from '../../core/services/user.service';
+import { PreviewPageComponent } from '../../core/components/preview-page/preview-page.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, DevicePreviewComponent],
+  imports: [CommonModule, FormsModule, PublicPageComponent, PreviewPageComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

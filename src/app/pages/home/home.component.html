@@ -30,8 +30,12 @@
       {{ message }}
     </p>
   </div>
-  <app-device-preview
-    [data]="{
+  <app-preview-page
+    class="flex-shrink-0"
+    style="flex-basis: 393px; height: 852px"
+  >
+    <app-public-page
+      [data]="{
     name: 'Freddy Montes',
     description: 'UX Engineer',
     links: [{
@@ -55,7 +59,6 @@
       url: '#',
     }]
   }"
-    class="flex-shrink-0"
-    style="flex-basis: 393px; height: 852px"
-  />
+    />
+  </app-preview-page>
 </div>

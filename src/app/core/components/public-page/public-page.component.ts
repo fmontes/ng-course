@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
 
 @Component({
-  selector: 'app-device-preview',
+  selector: 'app-public-page',
   standalone: true,
   imports: [CommonModule, UserAvatarComponent],
-  templateUrl: './device-preview.component.html',
-  styleUrls: ['./device-preview.component.css'],
+  templateUrl: './public-page.component.html',
+  styleUrls: ['./public-page.component.css'],
 })
-export class DevicePreviewComponent {
+export class PublicPageComponent {
   @Input() data: any | null = null;
 }

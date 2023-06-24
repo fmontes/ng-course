@@ -8,13 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { CollectionsService } from '../../core/services/collections.service';
-import { LinksRecord, LinksResponse } from '../../core/types/pocketbase-types';
+import { LinksRecord, LinksResponse, UsersResponse } from '../../core/types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ProfileData } from '../../core/resolvers/profile.resolver';
 import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
+import { UserAvatarComponent } from '../../core/components/user-avatar/user-avatar.component';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;
@@ -30,7 +31,7 @@ export type LinkPayload = Pick<
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DevicePreviewComponent],
+  imports: [CommonModule, ReactiveFormsModule, DevicePreviewComponent, UserAvatarComponent],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
 })
@@ -47,6 +48,12 @@ export class EditComponent implements OnInit {
 
   get items() {
     return this.form.get('links') as FormArray<FormLinkGroup>;
+  }
+
+  get user$() {
+    return this.activatedRoute.data.pipe(
+      map(({ data }) => data.user)
+    ) as unknown as Observable<UsersResponse>;
   }
 
   ngOnInit(): void {

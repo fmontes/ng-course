@@ -19,6 +19,8 @@ export const profileResolver: ResolveFn<ProfileData> = (route, state) => {
     switchMap((user: UsersResponse) => {
       return collectionService.getListByOwner(user.id).pipe(
         map((links: LinksResponse[]) => {
+          console.log(user)
+
           return {
             user: user,
             links: links,

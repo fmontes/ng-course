@@ -16,8 +16,6 @@ export class NavUserInfoComponent {
   private router = inject(Router);
   authState$ = this.userService.authState$;
 
-
-
   logout() {
     this.userService.logout();
     this.router.navigate(['/login']);

@@ -1,6 +1,8 @@
 <!-- TODO: Make the url a pipe -->
 <img
   *ngIf="user && user.avatar; else fallback"
+  [width]="this.size"
+  [height]="this.size"
   [src]="
     'http://127.0.0.1:8090/api/files/_pb_users_auth_/' +
     user.id +
@@ -12,5 +14,12 @@
 />
 
 <ng-template #fallback>
-  <img src="/assets/fallback-avatar.svg" alt="" />
+  <img
+    src="/assets/fallback-avatar.svg"
+    alt=""
+    [ngStyle]="{
+      width: this.size + 'px',
+      height: this.size + 'px',
+    }"
+  />
 </ng-template>

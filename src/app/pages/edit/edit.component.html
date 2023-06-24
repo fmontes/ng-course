@@ -5,13 +5,8 @@
     <form [formGroup]="form" (submit)="saveLinks($event)">
       <div class="grid grid-cols-2 gap-6 mb-12">
         <div class="flex gap-6">
-          <img
-            src="/assets/demo-avatar.jpg"
-            alt=""
-            class="block rounded-full"
-            height="76"
-            width="76"
-          />
+
+          <app-user-avatar [size]="77" [user]="(user$ | async)" />
           <div class="m-0 form-group">
             <label for="name">Full Name</label>
             <input

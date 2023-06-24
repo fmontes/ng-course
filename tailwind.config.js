@@ -109,11 +109,30 @@ module.exports = {
           "&:hover": {
             backgroundColor: theme("colors.primary.400"),
           },
-        },
-        "button.link": {
-          all: "inherit",
-          display: 'inline',
-          cursor: 'pointer',
+
+          "&.link": {
+            all: "inherit",
+            display: 'inline',
+            cursor: 'pointer',
+
+            "&:hover": {
+              textDecoration: 'underline',
+              backgroundColor: 'transparent',
+            }
+          },
+
+          "&.outline": {
+            outlineColor: theme("colors.primary.500"),
+            display: 'inline',
+            cursor: 'pointer',
+            backgroundColor: 'transparent',
+            color: theme("colors.primary.500"),
+
+            "&:hover": {
+              outlineColor: theme("colors.primary.300"),
+              color: theme("colors.primary.300"),
+            }
+          }
         },
         "input[type='text'], input[type='password'], input[type='email'], input[type='url']": {
           appearance: "none",

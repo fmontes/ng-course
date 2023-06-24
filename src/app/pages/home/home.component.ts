@@ -20,14 +20,19 @@ export class HomeComponent {
 
   onSubmit(): void {
     this.message = '';
-    this.userService.getByUsername(this.username).subscribe((user) => {
-      if (!user) {
-        this.router.navigate(['/register'], {
-          queryParams: { username: this.username },
-        });
-      }
 
-      this.message = 'User already exists';
-    });
+    if (this.username) {
+      this.userService.getByUsername(this.username).subscribe((user) => {
+        if (!user) {
+          this.router.navigate(['/register'], {
+            queryParams: { username: this.username },
+          });
+        }
+
+        this.message = 'User already exists';
+      });
+    }
+
+    this.message = 'Please enter a username';
   }
 }

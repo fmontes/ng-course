@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserAvatarComponent } from '../../../../core/components/user-avatar/user-avatar.component';
 import { UsersResponse } from '../../../../core/types/pocketbase-types';
+import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-avatar-upload',
@@ -12,6 +13,7 @@ import { UsersResponse } from '../../../../core/types/pocketbase-types';
 })
 export class AvatarUploadComponent {
   @Input() user: UsersResponse | null = null;
+  userService = inject(UserService);
 
   selectedImageUrl = '';
 
@@ -21,6 +23,14 @@ export class AvatarUploadComponent {
 
     if (file) {
       this.selectedImageUrl = URL.createObjectURL(file);
+
+      if (!this.user?.id) {
+        return;
+      }
+
+      this.userService.saveAvatar(this.user?.id, file).subscribe((user) => {
+        console.log(user);
+      });
     }
   }
 }

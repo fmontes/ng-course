@@ -93,6 +93,24 @@ export class UserService {
   }
 
   /**
+   * Save the avatar image
+   *
+   * @param {string} id
+   * @param {File} avatar
+   * @return {*}
+   * @memberof UserService
+   */
+  saveAvatar(id: string, avatar: File) {
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+
+    return this.http.patch<UsersResponse>(
+      `${environment.apiUrl}/api/collections/users/records/${id}`,
+      formData
+    );
+  }
+
+  /**
    * Remove the user information from cookies
    *
    * @memberof UserService

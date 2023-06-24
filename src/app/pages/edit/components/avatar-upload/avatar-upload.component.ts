@@ -12,7 +12,7 @@ import { UserService } from '../../../../core/services/user.service';
   styleUrls: ['./avatar-upload.component.css'],
 })
 export class AvatarUploadComponent {
-  @Input() user: UsersResponse | null = null;
+  @Input() user: Pick<UsersResponse, 'id' | 'avatar' | 'name'> | null = null;
   @Output() avatarChange: EventEmitter<UsersResponse> = new EventEmitter();
 
   userService = inject(UserService);

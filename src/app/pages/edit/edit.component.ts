@@ -42,7 +42,7 @@ export type LinkPayload = Pick<
     ReactiveFormsModule,
     PublicPageComponent,
     AvatarUploadComponent,
-    PreviewPageComponent
+    PreviewPageComponent,
   ],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
@@ -54,6 +54,9 @@ export class EditComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
 
   errorMessage = '';
+  data$ = this.activatedRoute.data.pipe(
+    map(({ data }) => data)
+  ) as unknown as Observable<ProfileData>;
 
   form = new FormGroup({
     name: new FormControl(''),
@@ -67,29 +70,21 @@ export class EditComponent implements OnInit {
     return this.form.get('links') as FormArray<FormLinkGroup>;
   }
 
-  get user$() {
-    return this.activatedRoute.data.pipe(
-      map(({ data }) => data.user)
-    ) as unknown as Observable<UsersResponse>;
-  }
-
   ngOnInit(): void {
-    const data$ = this.activatedRoute.data.pipe(
-      map(({ data }) => data)
-    ) as unknown as Observable<ProfileData>;
+    this.data$
+      .pipe(take(1))
+      .subscribe(({ links, name, description, id, avatar }) => {
+        this.form.patchValue({
+          name,
+          description,
+          id,
+          avatar,
+        });
 
-    data$.pipe(take(1)).subscribe(({ links, user }) => {
-      this.form.patchValue({
-        name: user.name,
-        description: user.description,
-        id: user.id,
-        avatar: user.avatar,
+        links.forEach(({ title, url, id }) => {
+          this.items.push(this.getFormLinkGroup(title, url, id));
+        });
       });
-
-      links.forEach(({ title, url, id }) => {
-        this.items.push(this.getFormLinkGroup(title, url, id));
-      });
-    });
   }
 
   /**
@@ -148,7 +143,7 @@ export class EditComponent implements OnInit {
         .pipe(
           catchError((err) => {
             console.error(err);
-            this.errorMessage = 'Something went wrong. Please try again.'
+            this.errorMessage = 'Something went wrong. Please try again.';
             return [];
           })
         )

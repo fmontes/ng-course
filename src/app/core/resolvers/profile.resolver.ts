@@ -5,8 +5,7 @@ import { CollectionsService } from '../services/collections.service';
 import { UserService } from '../services/user.service';
 import { UsersResponse, LinksResponse } from '../types/pocketbase-types';
 
-export type ProfileData = {
-  user: UsersResponse;
+export type ProfileData = UsersResponse & {
   links: LinksResponse[];
 };
 
@@ -19,11 +18,11 @@ export const profileResolver: ResolveFn<ProfileData> = (route, state) => {
     switchMap((user: UsersResponse) => {
       return collectionService.getListByOwner(user.id).pipe(
         map((links: LinksResponse[]) => {
-          console.log(user)
+          console.log(user);
 
           return {
-            user: user,
-            links: links,
+            ...user,
+            links,
           };
         })
       );

@@ -2,7 +2,7 @@
   <div class="flex-1">
     <header class="flex items-center justify-between mb-12">
     <h1>Edit your page</h1>
-    <a class="btn link" [href]="(user$ | async)?.username" target="_blank">Preview →</a>
+    <a class="btn link" [href]="(data$ | async)?.username" target="_blank">Preview →</a>
   </header>
 
     <p class="mb-8 text-primary-300">{{ errorMessage }}</p>
@@ -13,7 +13,7 @@
           <app-avatar-upload
             (avatarChange)="setAvatar($event)"
             class="flex-shrink-0"
-            [user]="user$ | async"
+            [user]="data$ | async"
           />
           <div class="m-0 form-group">
             <label for="name">Full Name</label>

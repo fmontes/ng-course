@@ -1,3 +1,1 @@
-<ng-container *ngIf="data$ | async as vm">
-  <app-public-page [data]="vm" />
-</ng-container>
+<app-public-page [data]="data$ | async" class="container m-auto" />

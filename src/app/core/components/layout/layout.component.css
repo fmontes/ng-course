@@ -1,0 +1,15 @@
+html {
+  @apply bg-black;
+}
+
+html:after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, theme("colors.primary.500") 0%, theme("colors.black") 50%) no-repeat;
+  z-index: -1;
+  opacity: 0.35;
+}

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -12,6 +12,7 @@ import { PublicPageComponent } from '../../core/components/public-page/public-pa
   imports: [CommonModule, PublicPageComponent],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProfileComponent {
   activatedRoute = inject(ActivatedRoute);

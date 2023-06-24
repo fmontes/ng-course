@@ -2,3 +2,108 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply text-base text-white;
+  }
+
+  h1 {
+    @apply mb-4 text-5xl font-bold font-display;
+  }
+
+  h2 {
+    @apply mb-4 text-4xl font-bold font-display;
+  }
+
+  h3 {
+    @apply mb-4 text-3xl font-bold font-display;
+  }
+
+  label {
+    @apply mb-1 text-gray-100;
+  }
+
+  button,
+  [type='button'],
+  [type='reset'],
+  [type='submit'],
+  .btn {
+    @apply inline-flex items-center h-10 px-4 text-white appearance-none bg-primary-500;
+  }
+
+  button:hover,
+  [type='button']:hover,
+  [type='reset']:hover,
+  [type='submit']:hover,
+  .btn:hover {
+    @apply bg-primary-400;
+  }
+
+  button.link,
+  [type='button'].link,
+  [type='reset'].link,
+  [type='submit'].link,
+  .btn.link {
+    all: unset;
+    @apply inline cursor-pointer;
+  }
+
+  button.link:hover,
+  [type='button'].link:hover,
+  [type='reset'].link:hover,
+  [type='submit'].link:hover,
+  .btn.link:hover {
+    @apply underline bg-transparent;
+  }
+
+  button.outline,
+  [type='button'].outline,
+  [type='reset'].outline,
+  [type='submit'].outline,
+  .btn.outline {
+    @apply inline bg-transparent cursor-pointer outline-primary-500 text-primary-500;
+  }
+
+  button.outline:hover,
+  [type='button'].outline:hover,
+  [type='reset'].outline:hover,
+  [type='submit'].outline:hover,
+  .btn.outline:hover {
+    @apply outline-primary-300 text-primary-300;
+  }
+
+  input[type='text'],
+  input[type='password'],
+  input[type='email'],
+  input[type='url'] {
+    @apply h-10 px-3 text-white bg-black border border-gray-300 appearance-none;
+  }
+
+  input[type='text']:hover,
+  input[type='password']:hover,
+  input[type='email']:hover,
+  input[type='url']:hover {
+    @apply border-gray-300;
+  }
+
+  input[type='text']:focus,
+  input[type='password']:focus,
+  input[type='email']:focus,
+  input[type='url']:focus {
+    @apply border-white bg-primary-950;
+  }
+
+  input[type='text']::placeholder,
+  input[type='password']::placeholder,
+  input[type='email']::placeholder,
+  input[type='url']::placeholder {
+    @apply text-gray-800;
+  }
+}
+
+@layer components {
+  .form-group {
+    @apply flex flex-col w-full mt-5 mb-5;
+  }
+}

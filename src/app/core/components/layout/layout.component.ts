@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
@@ -8,7 +8,8 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [CommonModule, HeaderComponent, RouterOutlet],
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LayoutComponent {
 

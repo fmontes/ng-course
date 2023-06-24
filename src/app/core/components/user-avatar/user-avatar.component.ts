@@ -10,6 +10,6 @@ import { UsersResponse } from '../../types/pocketbase-types';
   styleUrls: ['./user-avatar.component.css'],
 })
 export class UserAvatarComponent {
-  @Input() user: UsersResponse | null = null;
+  @Input() user: Pick<UsersResponse, 'id' | 'avatar' | 'name'> | null = null;
   @Input() size = 64;
 }

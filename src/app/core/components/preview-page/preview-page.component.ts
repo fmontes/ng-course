@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './preview-page.component.html',
-  styleUrls: ['./preview-page.component.css']
+  styleUrls: ['./preview-page.component.css'],
 })
 export class PreviewPageComponent {
 

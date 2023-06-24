@@ -1,7 +1,7 @@
 <h1 class="text-center">Register</h1>
 
 <ul *ngFor="let message of errorMessages"  role="alert">
-  <li class="text-red-300 list-disc">{{message}}</li>
+  <li class="text-primary-300 list-disc">{{message}}</li>
 </ul>
 
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">

@@ -107,7 +107,9 @@ export class UserService {
     return this.http.patch<UsersResponse>(
       `${environment.apiUrl}/api/collections/users/records/${id}`,
       formData
-    );
+    ).pipe(tap((user: UsersResponse) => {
+      this.authState$.next(user);
+    }));
   }
 
   /**

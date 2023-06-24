@@ -1,3 +1,9 @@
+<img
+  src="/assets/ico-camera.svg"
+  alt=""
+  class="absolute px-1 pb-1 bg-red-500 rounded-full -top-1 w-7 h-7 -right-3"
+/>
+
 <input
   type="file"
   #fileInput
@@ -6,12 +12,14 @@
   (change)="onChange($event)"
   accept="image/jpeg, image/gif, image/png"
 />
+
 <img
   *ngIf="selectedImageUrl; else avatarTemplate"
   [src]="selectedImageUrl"
   width="77"
   height="77"
   (click)="fileInput.click()"
+  class="object-cover overflow-hidden rounded-full max-w-none w-[77px] h-[77px]"
 />
 <ng-template #avatarTemplate>
   <app-user-avatar

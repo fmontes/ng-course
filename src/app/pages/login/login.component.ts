@@ -42,9 +42,9 @@ export class LoginComponent {
         }),
         filter((user) => !!user)
       )
-      .subscribe((res) => {
+      .subscribe((user) => {
         this.error = '';
-        this.router.navigate(['/']);
+        this.router.navigate([`/${user?.record.username}/edit`]);
       });
   }
 }

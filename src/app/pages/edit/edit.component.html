@@ -1,6 +1,9 @@
 <div class="container flex gap-16 mx-auto">
   <div class="flex-1">
-    <h1 class="mb-12">Edit your page</h1>
+    <header class="flex items-center justify-between mb-12">
+    <h1>Edit your page</h1>
+    <a class="btn link" [href]="(user$ | async)?.username" target="_blank">Preview →</a>
+  </header>
 
     <p class="mb-8 text-primary-300">{{ errorMessage }}</p>
 

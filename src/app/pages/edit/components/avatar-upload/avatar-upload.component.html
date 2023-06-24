@@ -14,5 +14,10 @@
   (click)="fileInput.click()"
 />
 <ng-template #avatarTemplate>
-  <app-user-avatar (click)="fileInput.click()" [size]="77" [user]="user" />
+  <app-user-avatar
+    class="overflow-hidden rounded-full"
+    (click)="fileInput.click()"
+    [size]="77"
+    [user]="user"
+  />
 </ng-template>

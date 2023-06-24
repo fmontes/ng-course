@@ -1,5 +1,9 @@
 <header class="mb-8 text-center">
-  <app-user-avatar [user]="data" [size]="100" />
+  <app-user-avatar
+    class="overflow-hidden rounded-full"
+    [user]="data"
+    [size]="100"
+  />
   <h1 class="mb-0 text-2xl">{{ data.name }}</h1>
   <p>{{ data.description }}</p>
 </header>

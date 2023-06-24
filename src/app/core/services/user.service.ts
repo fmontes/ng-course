@@ -111,6 +111,21 @@ export class UserService {
   }
 
   /**
+   * Save the user information
+   *
+   * @param {string} id
+   * @param {(Pick<UsersResponse, 'name' | 'description'>)} user
+   * @return {*}
+   * @memberof UserService
+   */
+  saveUser(id: string, user: Pick<UsersResponse, 'name' | 'description'>) {
+    return this.http.patch<UsersResponse>(
+      `${environment.apiUrl}/api/collections/users/records/${id}`,
+      user
+    );
+  }
+
+  /**
    * Remove the user information from cookies
    *
    * @memberof UserService

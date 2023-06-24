@@ -8,14 +8,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { CollectionsService } from '../../core/services/collections.service';
-import { LinksRecord, LinksResponse, UsersResponse } from '../../core/types/pocketbase-types';
+import {
+  LinksRecord,
+  LinksResponse,
+  UsersResponse,
+} from '../../core/types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { Observable, forkJoin, merge } from 'rxjs';
+import { catchError, map, take } from 'rxjs/operators';
 import { ProfileData } from '../../core/resolvers/profile.resolver';
 import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
 import { AvatarUploadComponent } from './components/avatar-upload/avatar-upload.component';
+import { UserService } from '../../core/services/user.service';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;
@@ -31,12 +36,18 @@ export type LinkPayload = Pick<
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DevicePreviewComponent, AvatarUploadComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DevicePreviewComponent,
+    AvatarUploadComponent,
+  ],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
 })
 export class EditComponent implements OnInit {
   private collectionService = inject(CollectionsService);
+  private userService = inject(UserService);
   private cookieService = inject(CookieService);
   private activatedRoute = inject(ActivatedRoute);
 
@@ -115,19 +126,35 @@ export class EditComponent implements OnInit {
   saveLinks(e: SubmitEvent) {
     e.preventDefault();
 
-    if (this.form.get('links')?.valid) {
+    if (this.form.valid) {
       const links = this.getLinksPayload(
         this.form.value.links as LinkPayload[]
       );
 
-      this.collectionService
-        .saveItems(links)
-        .subscribe((links: LinksResponse[]) => {
-          this.items.clear();
+      const userId = this.form.value.id as string;
+      const userInfo = {
+        name: this.form.value.name as string,
+        description: this.form.value.description as string,
+      };
 
-          links.forEach(({ title, url, id }) => {
-            this.items.push(this.getFormLinkGroup(title, url, id));
-          });
+      forkJoin([
+        this.userService.saveUser(userId, userInfo),
+        this.collectionService.saveItems(links),
+      ])
+        .pipe(
+          catchError((err) => {
+            console.error(err);
+            return [];
+          })
+        )
+        .subscribe(([user, items]) => {
+          if (items) {
+            this.items.clear();
+
+            links.forEach(({ title, url, id }) => {
+              this.items.push(this.getFormLinkGroup(title, url, id));
+            });
+          }
         });
     }
   }

@@ -51,6 +51,8 @@ export class EditComponent implements OnInit {
   private cookieService = inject(CookieService);
   private activatedRoute = inject(ActivatedRoute);
 
+  errorMessage = '';
+
   form = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
@@ -144,6 +146,7 @@ export class EditComponent implements OnInit {
         .pipe(
           catchError((err) => {
             console.error(err);
+            this.errorMessage = 'Something went wrong. Please try again.'
             return [];
           })
         )

@@ -2,10 +2,16 @@
   <div class="flex-1">
     <h1 class="mb-12">Edit your page</h1>
 
+    <p class="mb-8 text-red-300">{{ errorMessage }}</p>
+
     <form [formGroup]="form" (submit)="saveLinks($event)">
       <div class="grid grid-cols-2 gap-6 mb-12">
         <div class="flex gap-6">
-          <app-avatar-upload (avatarChange)="setAvatar($event)" class="flex-shrink-0" [user]="user$ | async" />
+          <app-avatar-upload
+            (avatarChange)="setAvatar($event)"
+            class="flex-shrink-0"
+            [user]="user$ | async"
+          />
           <div class="m-0 form-group">
             <label for="name">Full Name</label>
             <input
@@ -63,10 +69,11 @@
         </div>
 
         <p class="flex justify-between m-0">
-          <button type="button" (click)="addItem()" class="outline">Add New Link</button>
+          <button type="button" (click)="addItem()" class="outline">
+            Add New Link
+          </button>
           <button>Save</button>
         </p>
-
       </div>
     </form>
   </div>

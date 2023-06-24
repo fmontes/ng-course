@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ProfileData } from '../../core/resolvers/profile.resolver';
 import { DevicePreviewComponent } from '../../core/components/device-preview/device-preview.component';
-import { UserAvatarComponent } from '../../core/components/user-avatar/user-avatar.component';
+import { AvatarUploadComponent } from './components/avatar-upload/avatar-upload.component';
 
 type FormLinkGroup = FormGroup<{
   title: FormControl<string | null>;
@@ -31,7 +31,7 @@ export type LinkPayload = Pick<
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, DevicePreviewComponent, UserAvatarComponent],
+  imports: [CommonModule, ReactiveFormsModule, DevicePreviewComponent, AvatarUploadComponent],
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
 })

@@ -1,0 +1,18 @@
+<input
+  type="file"
+  #fileInput
+  class="hidden"
+  aria-label="Browse for an avatar"
+  (change)="onChange($event)"
+  accept="image/jpeg, image/gif, image/png"
+/>
+<img
+  *ngIf="selectedImageUrl; else avatarTemplate"
+  [src]="selectedImageUrl"
+  width="77"
+  height="77"
+  (click)="fileInput.click()"
+/>
+<ng-template #avatarTemplate>
+  <app-user-avatar (click)="fileInput.click()" [size]="77" [user]="user" />
+</ng-template>

@@ -123,6 +123,7 @@ export class EditComponent implements OnInit {
    * @memberof EditComponent
    */
   saveLinks(e: SubmitEvent) {
+    this.errorMessage = '';
     e.preventDefault();
 
     if (this.form.valid) {
@@ -156,6 +157,8 @@ export class EditComponent implements OnInit {
             });
           }
         });
+    } else {
+      this.errorMessage = 'All fields are required.';
     }
   }
 

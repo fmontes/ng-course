@@ -124,6 +124,12 @@ module.exports = {
           paddingLeft: theme("spacing.3"),
           paddingRight: theme("spacing.3"),
           height: "2.5rem",
+          "&[readonly], &[readonly]:hover, &[readonly]:focus": {
+            borderColor: theme("colors.red.600"),
+            backgroundColor: theme("colors.primary.950"),
+            color: theme("colors.red.300"),
+          },
+
           "&:hover": {
             borderColor: theme("colors.gray.300"),
           },

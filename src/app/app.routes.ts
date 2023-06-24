@@ -8,6 +8,7 @@ import { profileResolver } from "./core/resolvers/profile.resolver";
 import { profileGuard } from "./core/guards/profile.guard";
 import { ProfileNotFoundComponent } from "./pages/profile-not-found/profile-not-found.component";
 import { RegisterComponent } from "./pages/register/register.component";
+import { registerGuard } from "./core/guards/register.guard";
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [registerGuard],
   },
   {
     path: 'profile-not-found',

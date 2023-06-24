@@ -35,12 +35,4 @@ export const profileGuard: CanActivateFn = (
     })
   );
 };
-
-// if (!!cookieService.get('token') && !!cookieService.get('userId')) {
-//   return of(true);
-// }
-
-// cookieService.delete('token');
-// cookieService.delete('userId');
-
-// router.navigate(['/login']);
+''

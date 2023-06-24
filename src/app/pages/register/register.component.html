@@ -1,6 +1,21 @@
 <h1 class="text-center">Register</h1>
 
+<ul *ngFor="let message of errorMessages"  role="alert">
+  <li class="text-red-300 list-disc">{{message}}</li>
+</ul>
+
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" formControlName="username" required readonly />
+    <app-error-message
+      class="mt-2"
+      [control]="registerForm.controls['username']"
+      [formSubmitted]="formSubmitted"
+    >
+      Username is required
+    </app-error-message>
+  </div>
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" id="email" formControlName="email" required />
@@ -21,17 +36,6 @@
       [formSubmitted]="formSubmitted"
     >
       Name is required
-    </app-error-message>
-  </div>
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" id="username" formControlName="username" required />
-    <app-error-message
-      class="mt-2"
-      [control]="registerForm.controls['username']"
-      [formSubmitted]="formSubmitted"
-    >
-      Username is required
     </app-error-message>
   </div>
   <div class="form-group">

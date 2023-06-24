@@ -25,6 +25,10 @@ type RegisterGroup = {
   passwordConfirm: FormControl<string | null>;
 };
 
+export function extractErrorMessages(data: PocketbaseError['data']): string[] {
+  return Object.values(data).map(error => error.message);
+}
+
 export const matchPassword: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
@@ -54,11 +58,14 @@ export const matchPassword: ValidatorFn = (
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  registerForm: FormGroup<RegisterGroup>;
-  userService = inject(UserService);
-  router = inject(Router);
   activatedRouter = inject(ActivatedRoute);
+  router = inject(Router);
+  userService = inject(UserService);
+
   formSubmitted = false;
+  registerForm: FormGroup<RegisterGroup>;
+
+  errorMessages: string[] = [];
 
   constructor() {
     const username = this.activatedRouter.snapshot.queryParams['username'];
@@ -95,7 +102,10 @@ export class RegisterComponent {
       .pipe(
         catchError(({ error }: HttpErrorResponse) => {
           const e = error as PocketbaseError;
-          console.error(e);
+
+          const messages = extractErrorMessages(e.data);
+          this.errorMessages = messages;
+
           // If an error occurs during registration, complete the Observable
           return of(null);
         }),

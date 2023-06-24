@@ -13,10 +13,11 @@ import { UserService } from '../../core/services/user.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  message = '';
   router = inject(Router);
   userService = inject(UserService);
+
   username: string = '';
+  message = '';
 
   onSubmit(): void {
     this.message = '';

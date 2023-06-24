@@ -43,6 +43,8 @@ export class EditComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
+    id: new FormControl(''),
+    avatar: new FormControl(''),
     links: new FormArray<FormLinkGroup>([]),
   });
 
@@ -65,6 +67,8 @@ export class EditComponent implements OnInit {
       this.form.patchValue({
         name: user.name,
         description: user.description,
+        id: user.id,
+        avatar: user.avatar,
       });
 
       links.forEach(({ title, url, id }) => {

@@ -14,7 +14,6 @@ import { UserService } from '../../../../core/services/user.service';
 export class AvatarUploadComponent {
   @Input() user: UsersResponse | null = null;
   userService = inject(UserService);
-
   selectedImageUrl = '';
 
   onChange(event: Event) {

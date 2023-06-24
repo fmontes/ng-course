@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileData } from '../../resolvers/profile.resolver';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
 
 @Component({

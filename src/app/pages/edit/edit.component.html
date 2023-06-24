@@ -5,7 +5,7 @@
     <form [formGroup]="form" (submit)="saveLinks($event)">
       <div class="grid grid-cols-2 gap-6 mb-12">
         <div class="flex gap-6">
-          <app-avatar-upload class="flex-shrink-0" [user]="user$ | async" />
+          <app-avatar-upload (avatarChange)="setAvatar($event)" class="flex-shrink-0" [user]="user$ | async" />
           <div class="m-0 form-group">
             <label for="name">Full Name</label>
             <input

@@ -132,6 +132,18 @@ export class EditComponent implements OnInit {
     }
   }
 
+  /**
+   * Update the avatar id in the form
+   *
+   * @param {UsersResponse} user
+   * @memberof EditComponent
+   */
+  setAvatar(user: UsersResponse) {
+    this.form.patchValue({
+      avatar: user.avatar,
+    });
+  }
+
   private getLinksPayload(links: LinkPayload[]) {
     return links.map((items) => {
       return {

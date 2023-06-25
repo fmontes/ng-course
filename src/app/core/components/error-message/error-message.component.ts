@@ -1,11 +1,11 @@
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-error-message',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgIf],
   templateUrl: './error-message.component.html',
   styleUrls: ['./error-message.component.css'],
 })

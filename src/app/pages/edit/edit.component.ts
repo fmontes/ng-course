@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   FormGroup,
   FormArray,
@@ -15,7 +15,7 @@ import {
 } from '../../core/types/pocketbase-types';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, forkJoin, merge } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { ProfileData } from '../../core/resolvers/profile.resolver';
 import { PublicPageComponent } from '../../core/components/public-page/public-page.component';
@@ -38,7 +38,7 @@ export type LinkPayload = Pick<
   selector: 'app-edit',
   standalone: true,
   imports: [
-    CommonModule,
+    AsyncPipe,
     ReactiveFormsModule,
     PublicPageComponent,
     AvatarUploadComponent,

@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf, NgStyle } from '@angular/common';
 import { UsersResponse } from '../../types/pocketbase-types';
 
 @Component({
   selector: 'app-user-avatar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgStyle, NgIf],
   templateUrl: './user-avatar.component.html',
   styleUrls: ['./user-avatar.component.css'],
 })

@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
 
 @Component({
   selector: 'app-public-page',
   standalone: true,
-  imports: [CommonModule, UserAvatarComponent],
+  imports: [UserAvatarComponent, NgFor],
   templateUrl: './public-page.component.html',
   styleUrls: ['./public-page.component.css'],
 })

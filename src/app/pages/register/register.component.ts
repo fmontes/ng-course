@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import {
   FormGroup,
   Validators,
@@ -53,7 +53,7 @@ export const matchPassword: ValidatorFn = (
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ErrorMessageComponent],
+  imports: [ReactiveFormsModule, ErrorMessageComponent, NgFor, NgIf],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })

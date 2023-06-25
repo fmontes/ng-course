@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { UserAvatarComponent } from '../../../../core/components/user-avatar/user-avatar.component';
 import { UsersResponse } from '../../../../core/types/pocketbase-types';
 import { UserService } from '../../../../core/services/user.service';
@@ -7,7 +7,7 @@ import { UserService } from '../../../../core/services/user.service';
 @Component({
   selector: 'app-avatar-upload',
   standalone: true,
-  imports: [CommonModule, UserAvatarComponent],
+  imports: [UserAvatarComponent, NgIf],
   templateUrl: './avatar-upload.component.html',
   styleUrls: ['./avatar-upload.component.css'],
 })

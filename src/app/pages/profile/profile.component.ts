@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { PublicPageComponent } from '../../core/components/public-page/public-pa
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, PublicPageComponent],
+  imports: [PublicPageComponent, AsyncPipe],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
   encapsulation: ViewEncapsulation.None,

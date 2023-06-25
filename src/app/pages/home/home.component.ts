@@ -1,5 +1,5 @@
-import { Component, Inject, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PublicPageComponent } from '../../core/components/public-page/public-page.component';
@@ -9,7 +9,7 @@ import { PreviewPageComponent } from '../../core/components/preview-page/preview
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, PublicPageComponent, PreviewPageComponent],
+  imports: [NgIf, FormsModule, PublicPageComponent, PreviewPageComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

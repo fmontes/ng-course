@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
@@ -7,7 +7,7 @@ import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
 @Component({
   selector: 'app-nav-user-info',
   standalone: true,
-  imports: [CommonModule, RouterLink, UserAvatarComponent],
+  imports: [RouterLink, UserAvatarComponent, AsyncPipe, NgIf],
   templateUrl: './nav-user-info.component.html',
   styleUrls: ['./nav-user-info.component.css'],
 })

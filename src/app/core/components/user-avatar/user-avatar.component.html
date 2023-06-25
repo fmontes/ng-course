@@ -3,13 +3,7 @@
   *ngIf="user && user.avatar; else fallback"
   [width]="this.size"
   [height]="this.size"
-  [src]="
-    'http://127.0.0.1:8090/api/files/_pb_users_auth_/' +
-    user.id +
-    '/' +
-    user.avatar +
-    '?thumb=100x100'
-  "
+  [src]="user.id | avatarUrl : user.avatar"
   [alt]="user.name"
 />
 

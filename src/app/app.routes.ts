@@ -1,13 +1,7 @@
 import { ActivatedRouteSnapshot, Routes } from '@angular/router';
 
-import { LoginComponent } from './pages/login/login.component';
-import { EditComponent } from './pages/edit/edit.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { profileResolver } from './core/resolvers/profile.resolver';
 import { profileGuard } from './core/guards/profile.guard';
-import { ProfileNotFoundComponent } from './pages/profile-not-found/profile-not-found.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { registerGuard } from './core/guards/register.guard';
 import { LayoutComponent } from './core/components/layout/layout.component';
 import { UserService } from './core/services/user.service';
@@ -32,28 +26,37 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomeComponent,
+        loadComponent: () =>
+          import('./pages/home/home.component').then((m) => m.HomeComponent),
         title: `${NAME} - Create and share your own links`,
       },
       {
         path: 'login',
-        component: LoginComponent,
+        loadComponent: () =>
+          import('./pages/login/login.component').then((m) => m.LoginComponent),
         title: `${NAME} - Login`,
       },
       {
         path: 'register',
-        component: RegisterComponent,
+        loadComponent: () =>
+          import('./pages/register/register.component').then(
+            (m) => m.RegisterComponent
+          ),
         canActivate: [registerGuard],
         title: `${NAME} - Register`,
       },
       {
         path: 'profile-not-found',
-        component: ProfileNotFoundComponent,
+        loadComponent: () =>
+          import('./pages/profile-not-found/profile-not-found.component').then(
+            (m) => m.ProfileNotFoundComponent
+          ),
         title: `${NAME} - Profile not found`,
       },
       {
         path: ':username/edit',
-        component: EditComponent,
+        loadComponent: () =>
+          import('./pages/edit/edit.component').then((m) => m.EditComponent),
         canActivate: [profileGuard],
         title: getNameTitle,
         resolve: {
@@ -64,7 +67,10 @@ export const routes: Routes = [
   },
   {
     path: ':username',
-    component: ProfileComponent,
+    loadComponent: () =>
+      import('./pages/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
     title: getNameTitle,
     resolve: {
       data: profileResolver,

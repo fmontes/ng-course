@@ -26,7 +26,10 @@
       />
       <button type="submit" class="flex-shrink-0">Claim my link</button>
     </form>
-    <p *ngIf="!!message" class="px-3 py-1 mt-4 text-primary-200 bg-primary-800 rounded">
+    <p
+      *ngIf="!!message"
+      class="px-3 py-1 mt-4 rounded text-primary-200 bg-primary-800"
+    >
       {{ message }}
     </p>
   </div>
@@ -38,6 +41,8 @@
       [data]="{
     name: 'Freddy Montes',
     description: 'UX Engineer',
+    id: 'qi6h8d5t38u7wj8',
+    avatar: 'r4xk_bm3w_400x400_ned9Ibfirz.jpg',
     links: [{
       title: 'Twitter',
       url: '#',

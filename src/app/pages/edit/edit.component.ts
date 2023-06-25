@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import {
   FormGroup,
   FormArray,
@@ -39,6 +39,8 @@ export type LinkPayload = Pick<
   standalone: true,
   imports: [
     AsyncPipe,
+    NgIf,
+    NgForOf,
     ReactiveFormsModule,
     PublicPageComponent,
     AvatarUploadComponent,
